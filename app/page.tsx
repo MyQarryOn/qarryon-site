@@ -1,411 +1,1293 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 
 export default function Page() {
-  const [bags, setBags] = useState(1);
-  const [service, setService] = useState("29");
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [toast, setToast] = useState("");
+  const [bags, setBags] = useState(2);
+  const [tier, setTier] = useState<"basic" | "premium" | "vip">("premium");
+  const [faqOpen, setFaqOpen] = useState<number | null>(0);
 
-  const rate = Number(service);
-  const total = useMemo(() => rate * bags + 5, [rate, bags]);
-
-  const showToast = (message: string) => {
-    setToast(message);
-    window.setTimeout(() => setToast(""), 3200);
+  const pricing = {
+    basic: 39,
+    premium: 59,
+    vip: 95,
   };
 
-  const faqItems = [
+  const total = useMemo(() => {
+    const base = pricing[tier];
+    const included = tier === "basic" ? 2 : tier === "premium" ? 5 : 8;
+    const extraBags = Math.max(0, bags - included) * 8;
+    return base + extraBags;
+  }, [bags, tier]);
+
+  const faqs = [
     {
-      q: "What areas does QarryOn serve?",
-      a: "We currently serve Atlanta and destinations within roughly 15 minutes outside the I-285 perimeter. Extended destinations may be supported as a premium add-on.",
+      q: "What does QarryOn do?",
+      a: "QarryOn provides luggage pickup, transport, and delivery across Atlanta so travelers can move freely without carrying bags through the city.",
     },
     {
-      q: "How far in advance should I book?",
-      a: "For the smoothest experience, book 12–24 hours in advance. Select service tiers also support shorter notice and same-day support.",
+      q: "Who is this best for?",
+      a: "Airport arrivals, Airbnb guests with check-in gaps, hotel guests, event attendees, and business travelers who want a smoother arrival experience.",
     },
     {
-      q: "What types of deliveries do you support?",
-      a: "Our current MVP supports airport to Airbnb or hotel delivery, and airport to a customer's live location. Future versions can support van retrieval and locker-based pickup.",
+      q: "What areas do you cover?",
+      a: "We start with Atlanta’s core travel corridors and support destinations within roughly 15 minutes outside the I-285 perimeter.",
     },
     {
-      q: "How do updates work after I book?",
-      a: "Customers receive confirmation, route progress, and delivery completion updates so the experience feels modern, transparent, and trustworthy.",
+      q: "How do pricing and add-ons work?",
+      a: "You choose a service tier based on your luggage needs, then add any extras such as rush delivery, after-hours support, or extended service area coverage.",
     },
   ];
 
   return (
     <>
-      <div className={`mobile-menu ${mobileOpen ? "open" : ""}`}>
-        <button className="mobile-close" onClick={() => setMobileOpen(false)}>
-          ✕
-        </button>
-        <a href="#how" onClick={() => setMobileOpen(false)}>How It Works</a>
-        <a href="#pricing" onClick={() => setMobileOpen(false)}>Pricing</a>
-        <a href="#usecases" onClick={() => setMobileOpen(false)}>Use Cases</a>
-        <a href="#faq" onClick={() => setMobileOpen(false)}>FAQ</a>
-        <a href="#booking" className="btn-p" onClick={() => setMobileOpen(false)} style={{ marginTop: "1rem" }}>
-          Schedule Pickup
-        </a>
-      </div>
+      <main>
+        <nav className="nav">
+          <div className="container nav-inner">
+            <a className="brand" href="#hero" aria-label="QarryOn home">
+              <Image
+                src="/logo-light.png"
+                alt="QarryOn"
+                width={220}
+                height={64}
+                priority
+                className="logo-light"
+              />
+            </a>
 
-      <nav>
-        <a className="logo" href="#hero">
-          <div className="logo-icon">
-            <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="5" width="16" height="14" rx="2.5" stroke="white" strokeWidth="1.5" fill="none" />
-              <path d="M6 5V3.5C6 2.67 6.67 2 7.5 2h3C11.33 2 12 2.67 12 3.5V5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              <circle cx="9" cy="12" r="2.5" stroke="white" strokeWidth="1.5" fill="none" />
-            </svg>
-          </div>
-          <span className="logo-word">Qarry<span>On</span></span>
-        </a>
-        <ul className="nav-links">
-          <li><a href="#how">How It Works</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#usecases">Use Cases</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-        <a href="#booking" className="nav-cta">Schedule Pickup</a>
-        <button className="hamburger" onClick={() => setMobileOpen(true)}>
-          <span></span><span></span><span></span>
-        </button>
-      </nav>
+            <div className="nav-links">
+              <a href="#how">How it works</a>
+              <a href="#pricing">Pricing</a>
+              <a href="#use-cases">Use cases</a>
+              <a href="#faq">FAQ</a>
+            </div>
 
-      <section id="hero">
-        <div className="hero-geo"><div className="hero-grid-lines"></div></div>
-        <div className="hero-layout">
-          <div>
-            <div className="hero-tag">Now Serving Atlanta, GA</div>
-            <h1>Move<span className="teal">freely.</span></h1>
-            <p className="hero-sub">Seamless luggage pickup and delivery across Atlanta. We handle your bags so you can travel without the weight.</p>
-            <div className="hero-actions">
-              <a href="#booking" className="btn-p">Schedule Pickup</a>
-              <a href="#how" className="btn-o">How It Works</a>
-            </div>
-            <div className="hero-stats">
-              <div><span className="stat-v">4hr</span><span className="stat-l">Express delivery</span></div>
-              <div><span className="stat-v">ATL</span><span className="stat-l">Atlanta-based</span></div>
-              <div><span className="stat-v">$100K</span><span className="stat-l">Max coverage</span></div>
-            </div>
+            <a className="btn btn-dark nav-cta-btn" href="#booking">
+              Book pickup
+            </a>
           </div>
-          <div className="hero-visual">
-            <div className="float-card tl">
-              <div className="fc-lbl">Pickup confirmed</div>
-              <div className="fc-val fc-t">Hartsfield-Jackson ✓</div>
+        </nav>
+
+        <section id="hero" className="hero hero-editorial">
+          <div className="container hero-editorial-grid">
+            <div className="hero-copy editorial-copy">
+              <div className="eyebrow">Private-feel luggage concierge</div>
+              <h1>
+                Travel like your bags are already handled.
+                <span>Because they should be.</span>
+              </h1>
+              <p className="hero-sub">
+                QarryOn is a modern luggage transfer service for travelers who want less friction between the airport and wherever they’re headed next.
+              </p>
+
+              <div className="hero-actions">
+                <a className="btn btn-primary" href="#booking">
+                  Book luggage pickup
+                </a>
+                <a className="btn btn-secondary" href="#pricing">
+                  See service tiers
+                </a>
+              </div>
+
+              <div className="hero-trust">
+                <div>Atlanta-based</div>
+                <div>Secure handling</div>
+                <div>Built for modern travel</div>
+              </div>
             </div>
-            <div className="phone-frame">
-              <div className="phone-top"><div className="phone-pill"></div></div>
-              <div className="phone-body">
-                <div className="ph-section-lbl">Active Delivery</div>
-                <div className="ph-cards">
-                  <div className="ph-card"><span className="ph-card-num">2</span><span className="ph-card-lbl">Bags</span></div>
-                  <div className="ph-card"><span className="ph-card-num" style={{ color: "var(--teal)" }}>65%</span><span className="ph-card-lbl">En Route</span></div>
-                </div>
-                <div className="ph-track">
-                  <div className="ph-track-lbl">Live Route</div>
-                  <div className="ph-route">
-                    <div className="ph-dot-s"></div>
-                    <span className="ph-city">ATL Airport</span>
-                    <div className="ph-line"></div>
-                    <span className="ph-city">Midtown Hotel</span>
-                    <div className="ph-dot-e"></div>
+
+            <div className="editorial-panel">
+              <div className="editorial-panel-inner">
+                <div className="editorial-panel-top">
+                  <div className="mini-logo-wrap">
+                    <Image
+                      src="/icon-light.png"
+                      alt="QarryOn icon"
+                      width={36}
+                      height={36}
+                      className="mini-logo-light"
+                    />
+                    <span>QarryOn</span>
                   </div>
-                  <div className="ph-prog-track"><div className="ph-prog-fill"></div></div>
-                  <div className="ph-eta"><div className="ph-pulse"></div><span>ETA 3:40 PM · On time</span></div>
+                  <div className="booking-badge dark-badge">Now serving Atlanta</div>
                 </div>
-                <button className="ph-cta-btn">TRACK MY BAGS</button>
+
+                <div className="editorial-kicker">Sample service route</div>
+                <div className="editorial-route">ATL → Midtown → Buckhead → Hotels → Airbnbs</div>
+                <div className="editorial-divider"></div>
+
+                <div className="editorial-stats">
+                  <div className="editorial-stat">
+                    <div className="editorial-stat-label">Typical use</div>
+                    <div className="editorial-stat-value">Airport arrival</div>
+                  </div>
+                  <div className="editorial-stat">
+                    <div className="editorial-stat-label">Service feel</div>
+                    <div className="editorial-stat-value">Concierge-level</div>
+                  </div>
+                </div>
+
+                <p>
+                  Designed for airport arrivals, check-in gaps, event days, and business travelers who want a more polished arrival experience.
+                </p>
               </div>
             </div>
-            <div className="float-card br">
-              <div className="fc-lbl">Delivered</div>
-              <div className="fc-val">The W Atlanta <span className="fc-t">✓</span></div>
+          </div>
+        </section>
+
+        <section className="section section-white">
+          <div className="container narrow">
+            <div className="intro-block">
+              <div className="eyebrow coral">Why QarryOn</div>
+              <h2>A better arrival experience.</h2>
+              <p>
+                Travelers should not have to drag luggage through the city, wait on check-in windows, or coordinate around their bags. QarryOn creates freedom between where you land and where you’re going.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="how">
-        <div className="si">
-          <span className="stag">The Process</span>
-          <h2 style={{ color: "#fff" }}>Three steps to <span style={{ color: "var(--teal)" }}>luggage-free</span> travel</h2>
-          <p className="ssub" style={{ color: "var(--muted-light)" }}>From your front door to your destination — handled end to end.</p>
-          <div className="steps">
-            <div className="step-card">
-              <span className="step-num">01</span>
-              <div className="step-icon">✦</div>
-              <h3>Book pickup</h3>
-              <p>Choose your service tier, set pickup and destination details, and confirm your preferred timing window.</p>
-            </div>
-            <div className="step-card">
-              <span className="step-num">02</span>
-              <div className="step-icon">➜</div>
-              <h3>We handle the transfer</h3>
-              <p>QarryOn receives, secures, and transports your bags while you move through Atlanta without the drag.</p>
-            </div>
-            <div className="step-card">
-              <span className="step-num">03</span>
-              <div className="step-icon">✓</div>
-              <h3>Delivered where you need it</h3>
-              <p>Your luggage arrives at your Airbnb, hotel, event, or live destination with updates along the way.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="pricing">
-        <div className="si">
-          <span className="stag">Pricing</span>
-          <h2>Simple packages. <span style={{ color: "var(--teal)" }}>Premium convenience.</span></h2>
-          <p className="ssub">Designed to look elevated now and scale into a larger luggage logistics platform later.</p>
-          <div className="price-grid">
-            <div className="pc">
-              <div className="p-icon">✦</div>
-              <div className="p-tier">Qarry Lite</div>
-              <div className="p-name">Lite</div>
-              <div className="p-amt"><sup>$</sup>29</div>
-              <div className="p-per">per bag · essential</div>
-              <ul className="p-feats">
-                <li><span className="cy">✓</span>Airport transfers</li>
-                <li><span className="cy">✓</span>Core Atlanta delivery</li>
-                <li><span className="cy">✓</span>Live confirmation</li>
-                <li><span className="cn">✕</span>Same-day delivery</li>
-                <li><span className="cn">✕</span>Priority handling</li>
-                <li><span className="cn">✕</span>White glove handling</li>
-              </ul>
-              <a href="#booking" className="btn-pr btn-pr-o">Get Started</a>
+        <section id="how" className="section section-soft">
+          <div className="container">
+            <div className="section-head">
+              <div className="eyebrow">How it works</div>
+              <h2>Simple enough to book in minutes.</h2>
+              <p className="section-sub">
+                Clear, premium, and designed to reduce friction from arrival to handoff.
+              </p>
             </div>
 
-            <div className="pc feat">
-              <div className="feat-badge">Most Popular</div>
-              <div className="p-icon">◆</div>
-              <div className="p-tier">Qarry Plus</div>
-              <div className="p-name">Plus</div>
-              <div className="p-amt"><sup>$</sup>49</div>
-              <div className="p-per">per bag · premium</div>
-              <ul className="p-feats">
-                <li><span className="cy">✓</span>Airport transfers</li>
-                <li><span className="cy">✓</span>$100,000 item coverage</li>
-                <li><span className="cy">✓</span>Real-time tracking</li>
-                <li><span className="cy">✓</span>Book 2 hours before</li>
-                <li><span className="cy">✓</span>Same-day delivery (4hr)</li>
-                <li><span className="cn">✕</span>White glove handling</li>
-              </ul>
-              <a href="#booking" className="btn-pr btn-pr-f">Get Started</a>
-            </div>
-
-            <div className="pc">
-              <div className="p-icon">⬢</div>
-              <div className="p-tier">Qarry Elite</div>
-              <div className="p-name">Elite</div>
-              <div className="p-amt"><sup>$</sup>79</div>
-              <div className="p-per">per bag · white glove</div>
-              <ul className="p-feats">
-                <li><span className="cy">✓</span>Airport transfers</li>
-                <li><span className="cy">✓</span>$100,000 item coverage</li>
-                <li><span className="cy">✓</span>Real-time tracking</li>
-                <li><span className="cy">✓</span>Book 30 min before</li>
-                <li><span className="cy">✓</span>Same-day delivery (4hr)</li>
-                <li><span className="cy">✓</span>White glove + signature</li>
-              </ul>
-              <a href="#booking" className="btn-pr btn-pr-o">Get Started</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="usecases">
-        <div className="si">
-          <span className="stag">Who We Serve</span>
-          <h2 style={{ color: "#fff" }}>Built for every <span style={{ color: "var(--teal)" }}>Atlanta</span> traveler</h2>
-          <p className="ssub" style={{ color: "var(--muted-light)" }}>Whether you're landing at Hartsfield or checking into a Buckhead Airbnb — QarryOn has you covered.</p>
-          <div className="cases">
-            <div className="case"><div className="case-icon">✈</div><div><h3>Airport Arrivals</h3><p>Skip baggage claim. We deliver your bags directly to your hotel while you grab a rideshare.</p></div></div>
-            <div className="case"><div className="case-icon">⌂</div><div><h3>Airbnb Check-In Gaps</h3><p>Early arrival, late check-in? We hold and deliver your bags when you're ready. No more waiting in lobbies.</p></div></div>
-            <div className="case"><div className="case-icon">▣</div><div><h3>Events & Conferences</h3><p>Attending a wedding, convention, or corporate event? Arrive light. We handle your bags before and after.</p></div></div>
-            <div className="case"><div className="case-icon">◫</div><div><h3>Frequent Travelers</h3><p>Set up recurring pickups, save your addresses, and move through Atlanta on your terms.</p></div></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="trust">
-        <div className="si">
-          <span className="stag">Why QarryOn</span>
-          <h2>Built on <span style={{ color: "var(--teal)" }}>trust</span></h2>
-          <p className="ssub">The original Claude draft positions the site around premium motion, live route visuals, pricing tiers, use cases, booking, FAQ, and footer support. This React version preserves that structure while making it usable in Next.js. </p>
-          <div className="trust-grid">
-            <div className="tc"><div className="tc-icon">✓</div><h3>Secure handling</h3><p>Clear transfer logic, premium visuals, and operational transparency help the brand feel credible from the first visit.</p></div>
-            <div className="tc"><div className="tc-icon">⌁</div><h3>Live-feel updates</h3><p>The site signals a tech-enabled service with route visuals, delivery states, and a modern customer journey.</p></div>
-            <div className="tc"><div className="tc-icon">◆</div><h3>Scalable design</h3><p>Strong enough for launch now, while still flexible enough to evolve into a larger logistics and app product later.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="booking">
-        <div className="si book-layout">
-          <div>
-            <span className="stag">Booking</span>
-            <h2 style={{ color: "#fff" }}>Start with a clean MVP booking experience.</h2>
-            <p className="ssub" style={{ color: "var(--muted-light)" }}>Use this section now, then wire it to Stripe, Supabase, and Twilio later without redesigning the site.</p>
-            <div className="benefits">
-              <div className="ben"><div className="ben-icon">⌁</div><div><h4>Traveler-first flow</h4><p>Airport to Airbnb, airport to live location, and future retrieval models can all grow from this base.</p></div></div>
-              <div className="ben"><div className="ben-icon">✓</div><div><h4>Pricing logic built in</h4><p>Bag count and tier selection update a live estimate, which can later connect to checkout and ops.</p></div></div>
-              <div className="ben"><div className="ben-icon">↗</div><div><h4>Ready to scale</h4><p>This section can evolve into a real booking backend without throwing away the UI work.</p></div></div>
-            </div>
-          </div>
-
-          <div className="book-form">
-            <div className="form-ttl">Schedule a pickup</div>
-            <div className="fr">
-              <div className="fg">
-                <label>Pickup</label>
-                <input placeholder="ATL Airport, Hotel, Airbnb..." />
+            <div className="steps">
+              <div className="step">
+                <div className="step-num">01</div>
+                <h3>Choose your service</h3>
+                <p>Select the package that fits your travel day, bag count, and timing needs.</p>
               </div>
-              <div className="fg">
-                <label>Drop-off</label>
-                <input placeholder="Midtown, Buckhead, Downtown..." />
+
+              <div className="step">
+                <div className="step-num">02</div>
+                <h3>Share pickup and drop-off details</h3>
+                <p>Tell us where you are, where your bags need to go, and when you need support.</p>
+              </div>
+
+              <div className="step">
+                <div className="step-num">03</div>
+                <h3>Move through Atlanta without the weight</h3>
+                <p>We handle the luggage transfer so you can head to your next stop with less friction.</p>
               </div>
             </div>
-            <div className="fr">
-              <div className="fg">
-                <label>Date</label>
-                <input type="date" />
+          </div>
+        </section>
+
+        <section id="pricing" className="section section-white">
+          <div className="container">
+            <div className="section-head">
+              <div className="eyebrow">Pricing</div>
+              <h2>Flat, transparent pricing.</h2>
+              <p className="section-sub">
+                Choose the level of convenience that fits your travel day.
+              </p>
+            </div>
+
+            <div className="pricing-grid">
+              <div className={`price-card ${tier === "basic" ? "active" : ""}`}>
+                <div className="tier-label">Basic Transfer</div>
+                <div className="price">$39</div>
+                <p>Best for solo travelers with simple airport-to-destination needs.</p>
+                <ul>
+                  <li>1–2 bags included</li>
+                  <li>Pickup or delivery</li>
+                  <li>Core Atlanta service area</li>
+                </ul>
+                <button className="btn btn-secondary btn-full" onClick={() => setTier("basic")}>
+                  Choose Basic
+                </button>
               </div>
-              <div className="fg">
-                <label>Service</label>
-                <select id="svc" value={service} onChange={(e) => setService(e.target.value)}>
-                  <option value="29">Qarry Lite — $29</option>
-                  <option value="49">Qarry Plus — $49</option>
-                  <option value="79">Qarry Elite — $79</option>
+
+              <div className={`price-card featured ${tier === "premium" ? "active" : ""}`}>
+                <div className="featured-badge">Most popular</div>
+                <div className="tier-label">Same-Day Delivery</div>
+                <div className="price">$59</div>
+                <p>Built for most travelers who want a smoother airport arrival and handoff.</p>
+                <ul>
+                  <li>3–5 bags included</li>
+                  <li>Pickup + delivery</li>
+                  <li>Priority handling</li>
+                </ul>
+                <button className="btn btn-primary btn-full" onClick={() => setTier("premium")}>
+                  Choose Premium
+                </button>
+              </div>
+
+              <div className={`price-card ${tier === "vip" ? "active" : ""}`}>
+                <div className="tier-label">Priority Concierge</div>
+                <div className="price">$95</div>
+                <p>Premium support for families, groups, events, and elevated travel needs.</p>
+                <ul>
+                  <li>Up to 8 bags included</li>
+                  <li>Flexible delivery timing</li>
+                  <li>White-glove feel</li>
+                </ul>
+                <button className="btn btn-secondary btn-full" onClick={() => setTier("vip")}>
+                  Choose VIP
+                </button>
+              </div>
+            </div>
+
+            <div className="addon-strip">
+              <div className="addon">Extra bag <span>+$8</span></div>
+              <div className="addon">Rush service <span>+$25</span></div>
+              <div className="addon">Outside zone <span>+$30</span></div>
+              <div className="addon">After hours <span>+$20</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="use-cases" className="section section-white editorial-cases">
+          <div className="container">
+            <div className="section-head">
+              <div className="eyebrow coral">Use cases</div>
+              <h2>Where QarryOn fits best.</h2>
+              <p className="section-sub">
+                Built around the moments travelers are most likely to feel delayed, burdened, or out of sync with their luggage.
+              </p>
+            </div>
+
+            <div className="editorial-case-grid">
+              <div className="editorial-case large">
+                <h3>Airport arrivals</h3>
+                <p>
+                  Skip carrying luggage from ATL while you head directly into your plans, not your baggage logistics.
+                </p>
+              </div>
+              <div className="editorial-case">
+                <h3>Airbnb timing gaps</h3>
+                <p>Arrive before check-in without dragging bags through the city.</p>
+              </div>
+              <div className="editorial-case">
+                <h3>Events and conferences</h3>
+                <p>Go straight to the venue while your luggage is routed properly.</p>
+              </div>
+              <div className="editorial-case">
+                <h3>Business travel</h3>
+                <p>Move from terminal to meetings, dinners, and hotels with less friction.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="booking" className="section section-white booking-section">
+          <div className="container booking-grid">
+            <div className="booking-copy">
+              <div className="eyebrow coral">Book now</div>
+              <h2>Get your pickup started in under 2 minutes.</h2>
+              <p>
+                Tell us where you are, where your bags need to go, and how many you’re traveling with. QarryOn is built for travelers who want less friction between landing and arriving.
+              </p>
+
+              <div className="booking-benefits">
+                <div className="booking-benefit">
+                  <strong>Airport to Airbnb or hotel</strong>
+                  <span>Perfect for early arrivals and delayed check-ins.</span>
+                </div>
+                <div className="booking-benefit">
+                  <strong>Airport to your live location</strong>
+                  <span>Go straight to lunch, meetings, events, or sightseeing.</span>
+                </div>
+                <div className="booking-benefit">
+                  <strong>Premium support</strong>
+                  <span>Rush, after-hours, and extended-zone service available.</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="booking-card booking-card-premium">
+              <div className="booking-card-head">
+                <div>
+                  <div className="booking-label">Live estimate</div>
+                  <h3>Book luggage pickup</h3>
+                </div>
+                <div className="booking-badge">Atlanta only</div>
+              </div>
+
+              <div className="form-row">
+                <label>Service tier</label>
+                <select value={tier} onChange={(e) => setTier(e.target.value as "basic" | "premium" | "vip")}>
+                  <option value="basic">Basic Transfer</option>
+                  <option value="premium">Same-Day Delivery</option>
+                  <option value="vip">Priority Concierge</option>
                 </select>
               </div>
-            </div>
-            <div className="fg">
-              <label>Bags</label>
-              <div className="bag-ctr">
-                <button type="button" className="bag-btn" onClick={() => setBags((b) => Math.max(1, b - 1))}>−</button>
-                <div className="bag-n" id="bn">{bags}</div>
-                <button type="button" className="bag-btn" onClick={() => setBags((b) => Math.min(20, b + 1))}>+</button>
+
+              <div className="form-row two-col">
+                <div>
+                  <label>Pickup</label>
+                  <input placeholder="ATL Airport, hotel, event..." />
+                </div>
+                <div>
+                  <label>Drop-off</label>
+                  <input placeholder="Airbnb, Midtown, Buckhead..." />
+                </div>
               </div>
-            </div>
-            <div className="fg">
-              <label>Notes</label>
-              <textarea rows={4} placeholder="Flight details, special handling, concierge notes..."></textarea>
-            </div>
 
-            <div className="price-sum">
-              <div className="pr"><span>Service rate</span><span id="pr1">${rate}/bag</span></div>
-              <div className="pr"><span>Bag count</span><span id="pr2">× {bags}</span></div>
-              <div className="pr"><span>Booking fee</span><span>$5</span></div>
-              <div className="pr tot"><span>Estimated total</span><span id="pr3">${total.toFixed(2)}</span></div>
-            </div>
-
-            <button className="btn-book" onClick={() => showToast("Booking request started. Next step: connect Stripe or form handling.")}>Continue</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="faq">
-        <div className="si faq-layout">
-          <div>
-            <span className="stag">FAQ</span>
-            <h2>Questions before booking.</h2>
-            <p className="ssub">This section keeps the polished Claude structure while moving interaction logic into React state.</p>
-          </div>
-          <div className="faq-list">
-            {faqItems.map((item, i) => (
-              <div key={item.q} className={`faq-item ${openFaq === i ? "open" : ""}`}>
-                <button className="faq-q" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
-                  <span>{item.q}</span>
-                  <span className="faq-arr">+</span>
-                </button>
-                {openFaq === i && <div className="faq-a">{item.a}</div>}
+              <div className="form-row two-col">
+                <div>
+                  <label>Date</label>
+                  <input type="date" />
+                </div>
+                <div>
+                  <label>Time window</label>
+                  <select>
+                    <option>Morning</option>
+                    <option>Midday</option>
+                    <option>Afternoon</option>
+                    <option>Evening</option>
+                  </select>
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section id="cta">
-        <div className="cta-inner">
-          <h2>Ready to move freely?</h2>
-          <p>Launch with a premium front-end now, then wire in booking, payments, and SMS without redesigning your brand.</p>
-          <a href="#booking" className="btn-cta">Book With QarryOn</a>
-          <div className="cta-note">Built for Atlanta travelers, hosts, hotels, and events.</div>
-        </div>
-      </section>
-
-      <footer>
-        <div className="footer-top">
-          <div>
-            <a className="logo" href="#hero" style={{ textDecoration: "none" }}>
-              <div className="logo-icon">
-                <svg width="16" height="18" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="1" y="5" width="16" height="14" rx="2.5" stroke="white" strokeWidth="1.5" fill="none" />
-                  <path d="M6 5V3.5C6 2.67 6.67 2 7.5 2h3C11.33 2 12 2.67 12 3.5V5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                  <circle cx="9" cy="12" r="2.5" stroke="white" strokeWidth="1.5" fill="none" />
-                </svg>
+              <div className="form-row">
+                <label>Number of bags</label>
+                <div className="bag-counter">
+                  <button type="button" onClick={() => setBags((b) => Math.max(1, b - 1))}>
+                    −
+                  </button>
+                  <span>{bags}</span>
+                  <button type="button" onClick={() => setBags((b) => b + 1)}>
+                    +
+                  </button>
+                </div>
               </div>
-              <span className="logo-word">Qarry<span>On</span></span>
+
+              <div className="addon-checks">
+                <label className="addon-check">
+                  <input type="checkbox" /> Rush service (+$25)
+                </label>
+                <label className="addon-check">
+                  <input type="checkbox" /> Outside zone (+$30)
+                </label>
+                <label className="addon-check">
+                  <input type="checkbox" /> After hours (+$20)
+                </label>
+              </div>
+
+              <div className="estimate premium-estimate">
+                <div className="estimate-row">
+                  <span>Selected service</span>
+                  <span>${pricing[tier]}</span>
+                </div>
+                <div className="estimate-row">
+                  <span>Bags</span>
+                  <span>{bags}</span>
+                </div>
+                <div className="estimate-row total">
+                  <span>Estimated total</span>
+                  <span>${total}</span>
+                </div>
+              </div>
+
+              <button className="btn btn-primary btn-full">Get my pickup started</button>
+              <p className="booking-footnote">
+                No app required to book. Payment and confirmations can be added next.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className="section section-soft">
+          <div className="container narrow">
+            <div className="section-head">
+              <div className="eyebrow">FAQ</div>
+              <h2>Questions before booking.</h2>
+            </div>
+
+            <div className="faq-list">
+              {faqs.map((item, i) => (
+                <div key={item.q} className={`faq-item ${faqOpen === i ? "open" : ""}`}>
+                  <button className="faq-question" onClick={() => setFaqOpen(faqOpen === i ? null : i)}>
+                    <span>{item.q}</span>
+                    <span>{faqOpen === i ? "−" : "+"}</span>
+                  </button>
+                  {faqOpen === i && <div className="faq-answer">{item.a}</div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section final-cta">
+          <div className="container narrow center">
+            <div className="eyebrow coral">Ready when you are</div>
+            <h2>Stop carrying your bags.</h2>
+            <p>
+              Book your first QarryOn delivery and make your next Atlanta arrival feel easier from the start.
+            </p>
+            <a className="btn btn-dark" href="#booking">
+              Book with QarryOn
             </a>
-            <p className="footer-desc">Luggage delivery for the modern traveler. Move freely through Atlanta — we'll handle the rest.</p>
-            <span className="atl-tag">Based in Atlanta, GA</span>
           </div>
-          <div className="fl-group"><h5>Service</h5><ul><li><a href="#how">How It Works</a></li><li><a href="#pricing">Qarry Lite</a></li><li><a href="#pricing">Qarry Plus</a></li><li><a href="#pricing">Qarry Elite</a></li></ul></div>
-          <div className="fl-group"><h5>Company</h5><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul></div>
-          <div className="fl-group"><h5>Legal</h5><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Insurance</a></li></ul></div>
-        </div>
-        <div className="footer-bot">
-          <p>© 2026 QarryOn, Inc. All rights reserved.</p>
-          <p style={{ fontSize: ".82rem", color: "rgba(255,255,255,.22)" }}>hello@myqarryon.com · 1-800-QARRYON</p>
-        </div>
-      </footer>
-
-      <div className={`toast ${toast ? "show" : ""}`}>{toast}</div>
+        </section>
+      </main>
 
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        :root{
-          --navy:#0D1B2A;--navy-mid:#122236;--navy-light:#1a2f45;
-          --teal:#2EC4B6;--teal-dark:#23a99d;--teal-glow:rgba(46,196,182,0.12);
-          --coral:#FF6B6B;--gray:#E5E5E5;--offwhite:#F8F9FA;
-          --muted:#8899aa;--muted-light:#b0c0cc;--white:#ffffff;
-          --heading:'Montserrat',sans-serif;--body:'Inter',sans-serif;
-          --r:8px;--rl:16px;
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@400;500;600&display=swap");
+
+        :root {
+          --navy: #0d1b2a;
+          --navy-soft: #132538;
+          --navy-deep: #08131e;
+          --teal: #2ec4b6;
+          --coral: #ff6b6b;
+          --offwhite: #fbfbfa;
+          --white: #ffffff;
+          --gray-1: #f1f3f5;
+          --gray-2: #d9dee3;
+          --gray-3: #7a8591;
+          --text: #102030;
+          --heading: "Montserrat", sans-serif;
+          --body: "Inter", sans-serif;
+          --radius: 16px;
+          --radius-sm: 10px;
+          --shadow: 0 20px 60px rgba(9, 20, 31, 0.08);
         }
-        html{scroll-behavior:smooth}
-        body{font-family:var(--body);background:var(--offwhite);color:var(--navy);line-height:1.6;overflow-x:hidden}
-        nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:72px;background:rgba(13,27,42,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(46,196,182,0.1)}
-        .logo{display:flex;align-items:center;gap:10px;text-decoration:none}.logo-icon{width:34px;height:34px;border-radius:8px;background:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0}.logo-word{font-family:var(--heading);font-size:1.2rem;font-weight:700;color:#fff;letter-spacing:-.01em}.logo-word span{color:var(--teal)}
-        .nav-links{display:flex;gap:2.5rem;list-style:none}.nav-links a{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.55);text-decoration:none;letter-spacing:.02em;transition:color .2s}.nav-links a:hover{color:var(--teal)}
-        .nav-cta{background:var(--teal);color:var(--navy);border:none;border-radius:var(--r);padding:.6rem 1.4rem;font-family:var(--heading);font-size:.85rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;letter-spacing:.02em}.nav-cta:hover{background:var(--teal-dark);transform:translateY(-1px)}
-        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}.hamburger span{display:block;width:22px;height:1.5px;background:#fff;transition:.3s}
-        .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;background:var(--navy);flex-direction:column;align-items:center;justify-content:center;gap:2rem}.mobile-menu.open{display:flex}.mobile-menu a{font-family:var(--heading);font-size:1.4rem;font-weight:600;color:#fff;text-decoration:none;transition:color .2s}.mobile-menu a:hover{color:var(--teal)}.mobile-close{position:absolute;top:1.5rem;right:5%;font-size:1.5rem;cursor:pointer;background:none;border:none;color:#fff}
-        #hero{min-height:100vh;background:var(--navy);display:flex;align-items:center;position:relative;overflow:hidden;padding:9rem 5% 5rem}.hero-geo{position:absolute;inset:0;pointer-events:none;overflow:hidden}.hero-geo::before{content:'';position:absolute;top:-200px;right:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(46,196,182,.07) 0%,transparent 70%)}.hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(46,196,182,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(46,196,182,.03) 1px,transparent 1px);background-size:60px 60px}.hero-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;width:100%;max-width:1200px;margin:0 auto;position:relative;z-index:1}
-        .hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(46,196,182,.25);border-radius:20px;padding:6px 14px;margin-bottom:1.5rem;width:fit-content}.hero-tag::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 1.8s infinite}
-        @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-        h1{font-family:var(--heading);font-size:clamp(3rem,5.5vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-.03em;color:#fff;margin-bottom:1.5rem} h1 .teal{color:var(--teal);display:block}
-        .hero-sub{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:2.5rem;max-width:440px}.hero-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-        .btn-p{background:var(--teal);color:var(--navy);border:2px solid var(--teal);border-radius:var(--r);padding:.9rem 2rem;font-family:var(--heading);font-size:.9rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;letter-spacing:.03em}.btn-p:hover{background:var(--teal-dark);border-color:var(--teal-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(46,196,182,.3)}
-        .btn-o{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.18);border-radius:var(--r);padding:.9rem 2rem;font-family:var(--heading);font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s}.btn-o:hover{border-color:rgba(255,255,255,.5)}
-        .hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.07)}.stat-v{font-family:var(--heading);font-size:1.8rem;font-weight:700;color:#fff;display:block;letter-spacing:-.02em}.stat-l{font-size:.72rem;color:var(--muted-light);letter-spacing:.06em;text-transform:uppercase}
-        .hero-visual{display:flex;align-items:center;justify-content:center;position:relative;height:520px}.phone-frame{width:260px;background:var(--navy-mid);border-radius:36px;border:1.5px solid rgba(46,196,182,.2);box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 0 1px rgba(46,196,182,.05);position:relative;z-index:2;overflow:hidden}.phone-top{height:36px;background:var(--navy);display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px}.phone-pill{width:80px;height:18px;background:#0a1520;border-radius:12px}.phone-body{padding:16px}.ph-section-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-family:var(--heading)}.ph-cards{display:flex;gap:8px;margin-bottom:12px}.ph-card{flex:1;background:var(--navy-light);border-radius:10px;padding:10px;text-align:center}.ph-card-num{font-family:var(--heading);font-size:18px;font-weight:700;color:#fff;display:block}.ph-card-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.ph-track{background:var(--navy-light);border-radius:10px;padding:12px;margin-bottom:10px}.ph-track-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-family:var(--heading)}.ph-route{display:flex;align-items:center;gap:6px;margin-bottom:8px}.ph-dot-s,.ph-dot-e{width:8px;height:8px;border-radius:50%;flex-shrink:0}.ph-dot-s{background:var(--teal)}.ph-dot-e{background:var(--coral)}.ph-line{flex:1;height:1px;background:rgba(255,255,255,.08)}.ph-city{font-size:9px;color:#fff;font-weight:600}.ph-prog-track{height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:6px}.ph-prog-fill{height:100%;width:65%;background:var(--teal);border-radius:2px}.ph-eta{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--teal)}.ph-pulse{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 1.8s infinite;flex-shrink:0}.ph-cta-btn{width:100%;padding:10px;background:var(--teal);color:var(--navy);border:none;border-radius:8px;font-family:var(--heading);font-size:10px;font-weight:700;letter-spacing:.05em;cursor:default}
-        .float-card{position:absolute;background:rgba(18,34,54,.95);border:1px solid rgba(46,196,182,.2);border-radius:12px;padding:12px 16px;backdrop-filter:blur(20px);box-shadow:0 8px 32px rgba(0,0,0,.3);z-index:3}.float-card.tl{top:40px;left:-20px}.float-card.br{bottom:60px;right:-20px}.fc-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:3px;font-family:var(--heading)}.fc-val{font-size:14px;font-weight:700;color:#fff;font-family:var(--heading)}.fc-t{color:var(--teal)}
-        section{padding:6rem 5%}.si{max-width:1200px;margin:0 auto}.stag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;font-family:var(--heading)}h2{font-family:var(--heading);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:1rem}.ssub{font-size:1.05rem;color:var(--muted);line-height:1.7;max-width:520px;margin-bottom:3rem}
-        #how{background:var(--navy);position:relative}#how::before{content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(46,196,182,.05) 0%,transparent 70%)}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}.step-card{background:var(--navy-light);border:1px solid rgba(46,196,182,.1);border-radius:var(--rl);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}.step-card:hover{border-color:rgba(46,196,182,.3);transform:translateY(-4px)}.step-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent)}.step-num{font-family:var(--heading);font-size:3.5rem;font-weight:700;color:rgba(46,196,182,.1);line-height:1;margin-bottom:1.5rem;display:block}.step-icon{width:48px;height:48px;border-radius:12px;background:var(--teal-glow);border:1px solid rgba(46,196,182,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;color:var(--teal)}.step-card h3{font-family:var(--heading);font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:.6rem}.step-card p{font-size:.92rem;color:var(--muted-light);line-height:1.65}
-        #pricing{background:var(--offwhite)}.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}.pc{background:#fff;border:1px solid var(--gray);border-radius:var(--rl);padding:2.5rem 2rem;position:relative;transition:all .2s}.pc:hover{border-color:var(--teal);box-shadow:0 12px 40px rgba(46,196,182,.1)}.pc.feat{background:var(--navy);border-color:var(--teal);box-shadow:0 20px 60px rgba(13,27,42,.15)}.feat-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal);color:var(--navy);font-family:var(--heading);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 16px;border-radius:20px;white-space:nowrap}.p-tier{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;font-family:var(--heading)}.pc.feat .p-tier{color:var(--teal)}.p-icon{width:44px;height:44px;border-radius:10px;background:rgba(46,196,182,.1);border:1px solid rgba(46,196,182,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}.p-name{font-family:var(--heading);font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}.pc.feat .p-name{color:#fff}.p-amt{font-family:var(--heading);font-size:2.6rem;font-weight:700;color:var(--navy);line-height:1;margin-bottom:.2rem}.pc.feat .p-amt{color:#fff}.p-amt sup{font-size:1.1rem;vertical-align:super;font-weight:500}.p-per{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}.pc.feat .p-per{color:rgba(255,255,255,.4)}.p-feats{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem}.p-feats li{font-size:.9rem;display:flex;align-items:flex-start;gap:10px;color:var(--navy)}.pc.feat .p-feats li{color:rgba(255,255,255,.8)}.cy{color:var(--teal);flex-shrink:0;font-size:13px;margin-top:2px}.cn{color:#ccc;flex-shrink:0;font-size:13px;margin-top:2px}.pc.feat .cn{color:rgba(255,255,255,.15)}.btn-pr{display:block;width:100%;padding:.85rem;border-radius:var(--r);font-family:var(--heading);font-size:.88rem;font-weight:700;text-align:center;cursor:pointer;text-decoration:none;transition:all .2s;border:2px solid var(--teal);letter-spacing:.03em}.btn-pr-o{background:transparent;color:var(--teal)}.btn-pr-o:hover{background:var(--teal);color:var(--navy)}.btn-pr-f{background:var(--teal);color:var(--navy)}.btn-pr-f:hover{background:var(--teal-dark)}
-        #usecases{background:var(--navy)}.cases{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}.case{background:var(--navy-light);border:1px solid rgba(46,196,182,.1);border-radius:var(--rl);padding:2rem;display:flex;gap:1.25rem;align-items:flex-start;transition:border-color .2s}.case:hover{border-color:rgba(46,196,182,.3)}.case-icon{width:48px;height:48px;border-radius:12px;background:var(--teal-glow);border:1px solid rgba(46,196,182,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal)}.case h3{font-family:var(--heading);font-size:1rem;font-weight:600;color:#fff;margin-bottom:.4rem}.case p{font-size:.9rem;color:var(--muted-light);line-height:1.6}
-        #trust{background:var(--offwhite)}.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}.tc{background:#fff;border:1px solid var(--gray);border-radius:var(--rl);padding:2rem;text-align:center;transition:all .2s}.tc:hover{border-color:var(--teal);transform:translateY(-4px);box-shadow:0 12px 32px rgba(46,196,182,.1)}.tc-icon{width:56px;height:56px;border-radius:50%;background:rgba(46,196,182,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--teal)}.tc h3{font-family:var(--heading);font-size:1.05rem;font-weight:600;color:var(--navy);margin-bottom:.5rem}.tc p{font-size:.9rem;color:var(--muted);line-height:1.65}
-        #booking{background:var(--navy);position:relative;overflow:hidden}#booking::before{content:'';position:absolute;top:-300px;left:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(46,196,182,.04) 0%,transparent 70%)}.book-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start;position:relative;z-index:1}.book-form{background:var(--navy-light);border:1px solid rgba(46,196,182,.12);border-radius:var(--rl);padding:2.5rem}.form-ttl{font-family:var(--heading);font-size:1rem;font-weight:600;color:#fff;margin-bottom:1.75rem;display:flex;align-items:center;gap:10px}.form-ttl::before{content:'';width:4px;height:18px;background:var(--teal);border-radius:2px}.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem}.fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}.fr .fg{margin-bottom:0}label{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-family:var(--heading)}input,select,textarea{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:.75rem 1rem;font-family:var(--body);font-size:.95rem;color:#fff;transition:border-color .2s;width:100%;-webkit-appearance:none}input::placeholder,textarea::placeholder{color:rgba(255,255,255,.22)}input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal);background:rgba(46,196,182,.05)}select option{background:var(--navy);color:#fff}.bag-ctr{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:.6rem 1rem}.bag-btn{width:28px;height:28px;border-radius:50%;border:1px solid rgba(46,196,182,.3);background:rgba(46,196,182,.1);color:var(--teal);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:var(--body)}.bag-btn:hover{background:var(--teal);color:var(--navy)}.bag-n{font-size:1rem;font-weight:600;color:#fff;flex:1;text-align:center;font-family:var(--heading)}.price-sum{background:rgba(46,196,182,.05);border:1px solid rgba(46,196,182,.15);border-radius:var(--r);padding:1.25rem;margin:1.5rem 0}.pr{display:flex;justify-content:space-between;font-size:.9rem;color:rgba(255,255,255,.45);padding:4px 0}.pr.tot{color:#fff;font-weight:600;border-top:1px solid rgba(46,196,182,.2);margin-top:8px;padding-top:12px;font-size:1rem}.pr.tot span:last-child{color:var(--teal)}.btn-book{width:100%;padding:1.1rem;background:var(--teal);color:var(--navy);border:none;border-radius:var(--r);font-family:var(--heading);font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.04em}.btn-book:hover{background:var(--teal-dark);box-shadow:0 8px 24px rgba(46,196,182,.3);transform:translateY(-1px)}.benefits{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem}.ben{display:flex;gap:1rem;align-items:flex-start}.ben-icon{width:40px;height:40px;border-radius:10px;background:var(--teal-glow);border:1px solid rgba(46,196,182,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal)}.ben h4{font-family:var(--heading);font-size:.9rem;font-weight:600;color:#fff;margin-bottom:3px}.ben p{font-size:.85rem;color:var(--muted-light);line-height:1.55}
-        #faq{background:var(--offwhite)}.faq-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:6rem}.faq-list{display:flex;flex-direction:column}.faq-item{border-bottom:1px solid var(--gray)}.faq-q{width:100%;background:none;border:none;text-align:left;padding:1.25rem 0;font-family:var(--heading);font-size:.93rem;font-weight:600;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:color .2s}.faq-q:hover{color:var(--teal)}.faq-arr{font-size:1.2rem;color:var(--muted);transition:transform .2s;flex-shrink:0}.faq-item.open .faq-arr{transform:rotate(45deg);color:var(--teal)}.faq-a{font-size:.9rem;color:var(--muted);line-height:1.7;padding:0 0 1.25rem;display:block}
-        #cta{background:var(--teal);padding:6rem 5%;text-align:center;position:relative;overflow:hidden}#cta::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:rgba(255,255,255,.1)}.cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}#cta h2{color:var(--navy);font-size:clamp(2rem,4vw,3rem)}#cta p{color:rgba(13,27,42,.6);font-size:1.05rem;line-height:1.7;margin:1rem auto 2.5rem;max-width:480px}.btn-cta{display:inline-block;background:var(--navy);color:#fff;border-radius:var(--r);padding:1.1rem 3rem;font-family:var(--heading);font-size:1rem;font-weight:700;text-decoration:none;transition:all .2s;letter-spacing:.04em}.btn-cta:hover{background:var(--navy-light);transform:translateY(-2px);box-shadow:0 12px 32px rgba(13,27,42,.3)}.cta-note{margin-top:1.25rem;font-size:.83rem;color:rgba(13,27,42,.45)}
-        footer{background:var(--navy);padding:3rem 5% 2rem;border-top:1px solid rgba(46,196,182,.1)}.footer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2.5rem;flex-wrap:wrap;gap:2rem}.footer-desc{font-size:.88rem;color:var(--muted);line-height:1.6;max-width:260px;margin-top:.5rem}.atl-tag{background:rgba(46,196,182,.1);border:1px solid rgba(46,196,182,.2);border-radius:20px;padding:4px 12px;font-size:.72rem;font-weight:700;color:var(--teal);font-family:var(--heading);letter-spacing:.06em;display:inline-block;margin-top:.85rem}.fl-group h5{font-family:var(--heading);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.85rem}.fl-group ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}.fl-group a{font-size:.88rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}.fl-group a:hover{color:var(--teal)}.footer-bot{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}.footer-bot p{font-size:.82rem;color:rgba(255,255,255,.22)}
-        .toast{position:fixed;bottom:2rem;right:2rem;background:var(--teal);color:var(--navy);padding:.9rem 1.5rem;border-radius:var(--r);font-family:var(--heading);font-size:.9rem;font-weight:700;transform:translateY(80px);opacity:0;transition:all .35s;z-index:999;box-shadow:0 8px 32px rgba(46,196,182,.35)}.toast.show{transform:translateY(0);opacity:1}
-        @media(max-width:960px){#hero{padding:7rem 5% 4rem}.hero-layout{grid-template-columns:1fr;gap:3rem}.hero-visual{height:300px}.steps{grid-template-columns:1fr 1fr}.cases{grid-template-columns:1fr}.trust-grid{grid-template-columns:1fr 1fr}.price-grid{grid-template-columns:1fr}.book-layout{grid-template-columns:1fr;gap:3rem}.faq-layout{grid-template-columns:1fr;gap:2rem}.nav-links{display:none}.hamburger{display:flex}.hero-stats{gap:1.5rem}.nav-cta{display:none}}
-        @media(max-width:600px){.steps{grid-template-columns:1fr}.trust-grid{grid-template-columns:1fr}.fr{grid-template-columns:1fr}.hero-stats{flex-wrap:wrap;gap:1.5rem 2rem}h1{font-size:2.8rem}.float-card{display:none}.phone-frame{width:100%;max-width:260px}}
+
+        * {
+          box-sizing: border-box;
+        }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          margin: 0;
+          font-family: var(--body);
+          color: var(--text);
+          background: var(--offwhite);
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+          font: inherit;
+        }
+
+        .container {
+          width: min(1200px, calc(100% - 48px));
+          margin: 0 auto;
+        }
+
+        .narrow {
+          width: min(840px, calc(100% - 48px));
+          margin: 0 auto;
+        }
+
+        .center {
+          text-align: center;
+        }
+
+        .nav {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          background: rgba(255, 255, 255, 0.88);
+          backdrop-filter: blur(14px);
+          border-bottom: 1px solid rgba(16, 32, 48, 0.06);
+        }
+
+        .nav-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          min-height: 82px;
+          gap: 24px;
+        }
+
+        .brand {
+          display: inline-flex;
+          align-items: center;
+        }
+
+        .logo-light {
+          display: block;
+          height: auto;
+          width: auto;
+        }
+
+        .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+        }
+
+        .nav-links a {
+          color: #42505e;
+          font-size: 0.96rem;
+        }
+
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 14px 22px;
+          border-radius: 999px;
+          font-family: var(--heading);
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          transition: 0.22s ease;
+          border: none;
+          cursor: pointer;
+        }
+
+        .btn-primary {
+          background: var(--teal);
+          color: var(--navy);
+          box-shadow: 0 14px 36px rgba(46, 196, 182, 0.24);
+        }
+
+        .btn-primary:hover {
+          transform: translateY(-1px);
+          opacity: 0.96;
+        }
+
+        .btn-secondary {
+          background: white;
+          color: var(--navy);
+          border: 1px solid rgba(16, 32, 48, 0.1);
+        }
+
+        .btn-dark {
+          background: var(--navy);
+          color: white;
+        }
+
+        .btn-full {
+          width: 100%;
+        }
+
+        .hero {
+          padding: 92px 0 88px;
+        }
+
+        .hero-editorial {
+          background:
+            radial-gradient(circle at top right, rgba(46, 196, 182, 0.08), transparent 30%),
+            linear-gradient(180deg, #ffffff 0%, #fcfcfb 100%);
+        }
+
+        .hero-editorial-grid {
+          display: grid;
+          grid-template-columns: 1.12fr 0.88fr;
+          gap: 80px;
+          align-items: center;
+        }
+
+        .eyebrow {
+          display: inline-block;
+          margin-bottom: 18px;
+          color: var(--teal);
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          font-family: var(--heading);
+        }
+
+        .eyebrow.coral {
+          color: var(--coral);
+        }
+
+        h1,
+        h2,
+        h3 {
+          margin: 0;
+          font-family: var(--heading);
+          letter-spacing: -0.03em;
+        }
+
+        h1 {
+          font-size: clamp(3rem, 7vw, 5.5rem);
+          line-height: 0.98;
+          color: var(--navy);
+          max-width: 820px;
+        }
+
+        h1 span {
+          display: block;
+          color: var(--teal);
+          margin-top: 8px;
+        }
+
+        .hero-sub {
+          margin-top: 26px;
+          max-width: 650px;
+          font-size: 1.14rem;
+          line-height: 1.85;
+          color: #5d6976;
+        }
+
+        .hero-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+          margin-top: 34px;
+        }
+
+        .hero-trust {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 24px;
+          margin-top: 36px;
+          color: #6a7682;
+          font-size: 0.95rem;
+        }
+
+        .editorial-panel {
+          display: flex;
+          align-items: stretch;
+        }
+
+        .editorial-panel-inner {
+          width: 100%;
+          padding: 34px;
+          border-radius: 28px;
+          background: linear-gradient(180deg, #0d1b2a 0%, #132538 100%);
+          color: white;
+          box-shadow: 0 24px 70px rgba(9, 20, 31, 0.16);
+        }
+
+        .editorial-panel-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          margin-bottom: 22px;
+        }
+
+        .mini-logo-wrap {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-family: var(--heading);
+          font-weight: 700;
+          color: white;
+        }
+
+        .mini-logo-light {
+          display: block;
+          height: auto;
+          width: auto;
+        }
+
+        .booking-badge {
+          background: rgba(46, 196, 182, 0.1);
+          color: #178f84;
+          padding: 8px 12px;
+          border-radius: 999px;
+          font-size: 0.78rem;
+          font-weight: 700;
+          white-space: nowrap;
+        }
+
+        .dark-badge {
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+        }
+
+        .editorial-kicker {
+          font-size: 0.78rem;
+          text-transform: uppercase;
+          letter-spacing: 0.14em;
+          color: var(--teal);
+          font-family: var(--heading);
+          font-weight: 700;
+        }
+
+        .editorial-route {
+          margin-top: 18px;
+          font-family: var(--heading);
+          font-size: 1.5rem;
+          line-height: 1.35;
+          letter-spacing: -0.02em;
+        }
+
+        .editorial-divider {
+          height: 1px;
+          background: rgba(255, 255, 255, 0.12);
+          margin: 22px 0;
+        }
+
+        .editorial-stats {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+          margin-bottom: 18px;
+        }
+
+        .editorial-stat {
+          padding: 16px;
+          border-radius: 18px;
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .editorial-stat-label {
+          color: rgba(255, 255, 255, 0.58);
+          font-size: 0.8rem;
+          margin-bottom: 6px;
+        }
+
+        .editorial-stat-value {
+          font-family: var(--heading);
+          font-weight: 700;
+          color: white;
+        }
+
+        .editorial-panel-inner p {
+          color: rgba(255, 255, 255, 0.78);
+          line-height: 1.85;
+          margin: 0;
+        }
+
+        .section {
+          padding: 104px 0;
+        }
+
+        .section-white {
+          background: white;
+        }
+
+        .section-soft {
+          background: #f8fafb;
+        }
+
+        .section-head {
+          margin-bottom: 44px;
+        }
+
+        .section-head h2 {
+          font-size: clamp(2rem, 4vw, 3.4rem);
+          line-height: 1.05;
+          color: var(--navy);
+          max-width: 760px;
+        }
+
+        .section-sub,
+        .intro-block p,
+        .booking-copy p,
+        .final-cta p {
+          font-size: 1.08rem;
+          line-height: 1.9;
+          color: #62707d;
+          max-width: 700px;
+        }
+
+        .intro-block {
+          text-align: center;
+        }
+
+        .intro-block h2 {
+          font-size: clamp(2rem, 4vw, 3rem);
+          color: var(--navy);
+          margin-bottom: 18px;
+        }
+
+        .intro-block p {
+          margin: 0 auto;
+        }
+
+        .steps {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+
+        .step {
+          background: white;
+          border: 1px solid rgba(16, 32, 48, 0.06);
+          border-radius: 22px;
+          padding: 30px;
+          min-height: 250px;
+        }
+
+        .step-num {
+          font-family: var(--heading);
+          font-size: 0.92rem;
+          color: var(--coral);
+          margin-bottom: 20px;
+          font-weight: 700;
+        }
+
+        .step h3 {
+          font-size: 1.3rem;
+          color: var(--navy);
+          margin-bottom: 12px;
+        }
+
+        .step p {
+          color: #65717d;
+          line-height: 1.8;
+        }
+
+        .pricing-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 26px;
+        }
+
+        .price-card {
+          position: relative;
+          background: white;
+          border: 1px solid rgba(16, 32, 48, 0.08);
+          border-radius: 26px;
+          padding: 30px;
+          box-shadow: 0 14px 34px rgba(9, 20, 31, 0.04);
+        }
+
+        .price-card.featured {
+          border: 1.5px solid rgba(46, 196, 182, 0.35);
+          box-shadow: 0 24px 60px rgba(46, 196, 182, 0.14);
+        }
+
+        .price-card.active {
+          transform: translateY(-2px);
+        }
+
+        .featured-badge {
+          position: absolute;
+          top: 18px;
+          right: 18px;
+          background: rgba(46, 196, 182, 0.1);
+          color: #178f84;
+          padding: 8px 12px;
+          border-radius: 999px;
+          font-size: 0.78rem;
+          font-weight: 700;
+        }
+
+        .tier-label {
+          font-size: 0.84rem;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          color: #7e8995;
+          margin-bottom: 14px;
+          font-weight: 700;
+          font-family: var(--heading);
+        }
+
+        .price {
+          font-family: var(--heading);
+          font-size: 3rem;
+          line-height: 1;
+          color: var(--navy);
+          margin-bottom: 14px;
+        }
+
+        .price-card p {
+          color: #66737f;
+          line-height: 1.8;
+          min-height: 88px;
+        }
+
+        .price-card ul {
+          list-style: none;
+          padding: 0;
+          margin: 24px 0;
+          display: grid;
+          gap: 12px;
+        }
+
+        .price-card li {
+          color: var(--navy);
+          position: relative;
+          padding-left: 18px;
+        }
+
+        .price-card li::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 10px;
+          width: 8px;
+          height: 8px;
+          border-radius: 999px;
+          background: var(--teal);
+        }
+
+        .addon-strip {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 14px;
+          margin-top: 28px;
+        }
+
+        .addon {
+          background: #f8fafb;
+          border: 1px solid rgba(16, 32, 48, 0.06);
+          border-radius: 18px;
+          padding: 16px 18px;
+          display: flex;
+          justify-content: space-between;
+          gap: 10px;
+          color: var(--navy);
+          font-weight: 500;
+        }
+
+        .addon span {
+          color: var(--coral);
+          font-weight: 700;
+        }
+
+        .editorial-cases {
+          padding-top: 120px;
+          padding-bottom: 120px;
+        }
+
+        .editorial-case-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr 1fr;
+          gap: 22px;
+        }
+
+        .editorial-case {
+          padding: 28px;
+          border-radius: 24px;
+          background: #ffffff;
+          border: 1px solid rgba(16, 32, 48, 0.08);
+          min-height: 210px;
+        }
+
+        .editorial-case.large {
+          grid-row: span 2;
+          min-height: 100%;
+        }
+
+        .editorial-case h3 {
+          color: var(--navy);
+          font-size: 1.35rem;
+          margin-bottom: 12px;
+        }
+
+        .editorial-case p {
+          color: #66737f;
+          line-height: 1.85;
+        }
+
+        .booking-section {
+          padding-top: 120px;
+          padding-bottom: 120px;
+        }
+
+        .booking-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 52px;
+          align-items: start;
+        }
+
+        .booking-copy h2 {
+          font-size: clamp(2rem, 4vw, 3.2rem);
+          color: var(--navy);
+          margin-bottom: 18px;
+        }
+
+        .booking-benefits {
+          display: grid;
+          gap: 18px;
+          margin-top: 30px;
+        }
+
+        .booking-benefit {
+          padding: 18px 20px;
+          border-radius: 18px;
+          background: #ffffff;
+          border: 1px solid rgba(16, 32, 48, 0.06);
+        }
+
+        .booking-benefit strong {
+          display: block;
+          color: var(--navy);
+          margin-bottom: 6px;
+          font-family: var(--heading);
+        }
+
+        .booking-benefit span {
+          color: #66737f;
+          line-height: 1.75;
+        }
+
+        .booking-card {
+          background: white;
+          border: 1px solid rgba(16, 32, 48, 0.08);
+          border-radius: 28px;
+          padding: 30px;
+          box-shadow: var(--shadow);
+        }
+
+        .booking-card-premium {
+          border: 1px solid rgba(16, 32, 48, 0.08);
+          background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+        }
+
+        .booking-card-head {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 16px;
+          margin-bottom: 22px;
+        }
+
+        .booking-card-head h3 {
+          font-size: 1.5rem;
+          color: var(--navy);
+          margin-top: 6px;
+        }
+
+        .booking-label {
+          font-size: 0.78rem;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          color: #7b8793;
+          font-family: var(--heading);
+          font-weight: 700;
+        }
+
+        .form-row {
+          margin-bottom: 18px;
+        }
+
+        .form-row label {
+          display: block;
+          margin-bottom: 8px;
+          font-size: 0.84rem;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: #7a8793;
+          font-weight: 700;
+          font-family: var(--heading);
+        }
+
+        input,
+        select {
+          width: 100%;
+          height: 52px;
+          border-radius: 14px;
+          border: 1px solid rgba(16, 32, 48, 0.1);
+          padding: 0 16px;
+          background: white;
+          color: var(--navy);
+        }
+
+        .two-col {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+        }
+
+        .two-col > div label {
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .bag-counter {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          border: 1px solid rgba(16, 32, 48, 0.1);
+          border-radius: 14px;
+          height: 52px;
+          padding: 0 10px;
+        }
+
+        .bag-counter button {
+          width: 36px;
+          height: 36px;
+          border-radius: 999px;
+          border: none;
+          background: rgba(46, 196, 182, 0.12);
+          color: var(--navy);
+          font-size: 1.25rem;
+          cursor: pointer;
+        }
+
+        .bag-counter span {
+          font-weight: 700;
+          font-family: var(--heading);
+          color: var(--navy);
+        }
+
+        .addon-checks {
+          display: grid;
+          gap: 10px;
+          margin: 10px 0 20px;
+        }
+
+        .addon-check {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #55626f;
+        }
+
+        .addon-check input {
+          width: 16px;
+          height: 16px;
+        }
+
+        .estimate {
+          margin: 24px 0;
+          padding: 18px;
+          border-radius: 18px;
+          background: #f8fafb;
+          border: 1px solid rgba(16, 32, 48, 0.06);
+        }
+
+        .premium-estimate {
+          margin-top: 18px;
+        }
+
+        .estimate-row {
+          display: flex;
+          justify-content: space-between;
+          gap: 16px;
+          padding: 8px 0;
+          color: #5f6b77;
+        }
+
+        .estimate-row.total {
+          margin-top: 8px;
+          padding-top: 14px;
+          border-top: 1px solid rgba(16, 32, 48, 0.08);
+          color: var(--navy);
+          font-weight: 700;
+        }
+
+        .booking-footnote {
+          margin-top: 14px;
+          text-align: center;
+          color: #7a8793;
+          font-size: 0.92rem;
+          line-height: 1.6;
+        }
+
+        .faq-list {
+          display: grid;
+          gap: 14px;
+        }
+
+        .faq-item {
+          background: white;
+          border: 1px solid rgba(16, 32, 48, 0.08);
+          border-radius: 18px;
+          padding: 0 22px;
+        }
+
+        .faq-question {
+          width: 100%;
+          background: transparent;
+          border: none;
+          padding: 22px 0;
+          display: flex;
+          justify-content: space-between;
+          gap: 24px;
+          text-align: left;
+          color: var(--navy);
+          font-family: var(--heading);
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+        }
+
+        .faq-answer {
+          padding: 0 0 22px;
+          color: #64707d;
+          line-height: 1.8;
+        }
+
+        .final-cta {
+          background: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
+        }
+
+        .final-cta h2 {
+          font-size: clamp(2.2rem, 4vw, 3.4rem);
+          color: var(--navy);
+          margin-bottom: 14px;
+        }
+
+        .final-cta p {
+          margin: 0 auto 28px;
+        }
+
+        @media (max-width: 1040px) {
+          .hero-editorial-grid,
+          .steps,
+          .pricing-grid,
+          .addon-strip,
+          .editorial-case-grid,
+          .booking-grid,
+          .editorial-stats {
+            grid-template-columns: 1fr;
+          }
+
+          .editorial-case.large {
+            grid-row: auto;
+          }
+
+          .nav-links {
+            display: none;
+          }
+
+          .hero-editorial-grid,
+          .booking-grid {
+            gap: 40px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .container,
+          .narrow {
+            width: min(100% - 28px, 1200px);
+          }
+
+          .section,
+          .hero {
+            padding-top: 72px;
+            padding-bottom: 72px;
+          }
+
+          .nav-inner {
+            min-height: 74px;
+          }
+
+          .hero-actions {
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          .btn,
+          .nav-cta-btn {
+            width: 100%;
+          }
+
+          .hero-trust {
+            gap: 12px 20px;
+          }
+
+          .two-col {
+            grid-template-columns: 1fr;
+          }
+
+          .logo-light {
+            width: 180px;
+            height: auto;
+          }
+        }
       `}</style>
     </>
   );

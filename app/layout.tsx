@@ -14,7 +14,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "QarryOn | Luggage Concierge in Atlanta",
-  description: "Same-day luggage pickup and delivery across Atlanta — airport, hotel, Airbnb, and beyond",
+  description: "Same-day luggage pickup and delivery across Atlanta — airport, hotel, Airbnb, and beyond.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

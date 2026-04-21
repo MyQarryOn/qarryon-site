@@ -379,11 +379,17 @@ export default function Page() {
                   <li>Ideal for 1–2 bags</li>
                 </ul>
                 <button
-                  className="btn btn-secondary btn-full"
-                  onClick={() => setTier("basic")}
-                >
-                  Choose Qarry Lite
-                </button>
+  className="btn btn-secondary btn-full"
+  onClick={() => {
+    setTier("basic");
+    document.getElementById("booking")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }}
+>
+  Estimate Qarry Lite
+</button>
               </div>
 
               <div
@@ -404,11 +410,17 @@ export default function Page() {
                   <li>Ideal for 3–5 bags</li>
                 </ul>
                 <button
-                  className="btn btn-primary btn-full"
-                  onClick={() => setTier("premium")}
-                >
-                  Choose Qarry Plus
-                </button>
+  className="btn btn-primary btn-full"
+  onClick={() => {
+    setTier("premium");
+    document.getElementById("booking")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }}
+>
+  Estimate Qarry Plus
+</button>
               </div>
 
               <div className={`price-card ${tier === "vip" ? "active" : ""}`}>
@@ -424,11 +436,17 @@ export default function Page() {
                   <li>Ideal for 6+ bags, families, or events</li>
                 </ul>
                 <button
-                  className="btn btn-secondary btn-full"
-                  onClick={() => setTier("vip")}
-                >
-                  Choose Qarry Elite
-                </button>
+  className="btn btn-secondary btn-full"
+  onClick={() => {
+    setTier("vip");
+    document.getElementById("booking")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }}
+>
+  Estimate Qarry Elite
+</button>
               </div>
             </div>
 
@@ -489,7 +507,7 @@ export default function Page() {
                   </h3>
 
                   <p className="use-desc-qarryon">
-                    Skip baggage claim entirely. We meet your bags and deliver
+                    We meet you and your bags and deliver
                     them to your hotel while you take a rideshare, free of
                     anything to drag.
                   </p>
@@ -669,7 +687,7 @@ export default function Page() {
           <div className="container booking-grid">
             <div className="booking-copy">
               <div className="eyebrow coral">Book Pickup</div>
-              <h2>Schedule in minutes.</h2>
+              <h2>Get your instant estimate.</h2>
               <p>
                 Tell us where you are, where your bags need to go, and how many
                 you’re traveling with. QarryOn is built for travelers who want
@@ -699,152 +717,135 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="booking-card booking-card-premium">
-              <div className="booking-card-head">
-                <div>
-                  <div className="booking-label">Live estimate</div>
-                  <h3>Book luggage pickup</h3>
-                </div>
-                <div className="booking-badge">Atlanta only</div>
-              </div>
+            <div className="booking-card booking-card-premium booking-card-luxury-simple">
+  <div className="booking-card-head booking-card-head-simple">
+    <div>
+      <div className="booking-label">Instant estimate</div>
+      <h3>Preview your QarryOn service</h3>
+      <p className="booking-subtext-simple">
+        Select your tier, adjust your bag count, and review your estimated
+        pricing before continuing to booking.
+      </p>
+    </div>
+    <div className="booking-badge">Atlanta launch market</div>
+  </div>
 
-              <div className="form-row">
-                <label>Service tier</label>
-                <select
-                  value={tier}
-                  onChange={(e) =>
-                    setTier(e.target.value as "basic" | "premium" | "vip")
-                  }
-                >
-                  <option value="basic">Qarry Lite</option>
-                  <option value="premium">Qarry Plus</option>
-                  <option value="vip">Qarry Elite</option>
-                </select>
-              </div>
+  <div className="booking-tier-preview">
+    <button
+      type="button"
+      className={`tier-pill ${tier === "basic" ? "active" : ""}`}
+      onClick={() => setTier("basic")}
+    >
+      <span className="tier-pill-name">Qarry Lite</span>
+      <span className="tier-pill-price">$39</span>
+    </button>
 
-              <div className="form-row two-col">
-                <div>
-                  <label>Pickup</label>
-                  <input placeholder="ATL Airport, hotel, Airbnb..." />
-                </div>
-                <div>
-                  <label>Drop-off</label>
-                  <input placeholder="Hotel, Airbnb, ATL Airport..." />
-                </div>
-              </div>
+    <button
+      type="button"
+      className={`tier-pill ${tier === "premium" ? "active" : ""}`}
+      onClick={() => setTier("premium")}
+    >
+      <span className="tier-pill-name">Qarry Plus</span>
+      <span className="tier-pill-price">$59</span>
+    </button>
 
-              <div className="form-row two-col">
-                <div>
-                  <label>Date</label>
-                  <input type="date" />
-                </div>
-                <div>
-                  <label>Time window</label>
-                  <select>
-                    <option>8:00 AM</option>
-                    <option>8:15 AM</option>
-                    <option>8:30 AM</option>
-                    <option>8:45 AM</option>
-                    <option>9:00 AM</option>
-                    <option>9:15 AM</option>
-                    <option>9:30 AM</option>
-                    <option>9:45 AM</option>
-                    <option>10:00 AM</option>
-                    <option>10:15 AM</option>
-                    <option>10:30 AM</option>
-                    <option>10:45 AM</option>
-                    <option>11:00 AM</option>
-                    <option>11:15 AM</option>
-                    <option>11:30 AM</option>
-                    <option>11:45 AM</option>
-                    <option>12:00 PM</option>
-                    <option>12:15 PM</option>
-                    <option>12:30 PM</option>
-                    <option>12:45 PM</option>
-                    <option>1:00 PM</option>
-                    <option>1:15 PM</option>
-                    <option>1:30 PM</option>
-                    <option>1:45 PM</option>
-                    <option>2:00 PM</option>
-                    <option>2:15 PM</option>
-                    <option>2:30 PM</option>
-                    <option>2:45 PM</option>
-                    <option>3:00 PM</option>
-                    <option>3:15 PM</option>
-                    <option>3:30 PM</option>
-                    <option>3:45 PM</option>
-                    <option>4:00 PM</option>
-                    <option>4:15 PM</option>
-                    <option>4:30 PM</option>
-                    <option>4:45 PM</option>
-                    <option>5:00 PM</option>
-                    <option>5:15 PM</option>
-                    <option>5:30 PM</option>
-                    <option>5:45 PM</option>
-                    <option>6:00 PM</option>
-                    <option>6:15 PM</option>
-                    <option>6:30 PM</option>
-                    <option>6:45 PM</option>
-                    <option>7:00 PM</option>
-                    <option>7:15 PM</option>
-                    <option>7:30 PM</option>
-                    <option>7:45 PM</option>
-                    <option>8:00 PM</option>
-                  </select>
-                </div>
-              </div>
+    <button
+      type="button"
+      className={`tier-pill ${tier === "vip" ? "active" : ""}`}
+      onClick={() => setTier("vip")}
+    >
+      <span className="tier-pill-name">Qarry Elite</span>
+      <span className="tier-pill-price">$95</span>
+    </button>
+  </div>
 
-              <div className="form-row">
-                <label>Number of bags</label>
-                <div className="bag-counter">
-                  <button
-                    type="button"
-                    onClick={() => setBags((b) => Math.max(1, b - 1))}
-                  >
-                    −
-                  </button>
-                  <span>{bags}</span>
-                  <button type="button" onClick={() => setBags((b) => b + 1)}>
-                    +
-                  </button>
-                </div>
-              </div>
+  <div className="selected-tier-card">
+    <div>
+      <div className="selected-tier-label">Selected tier</div>
+      <h4>{tierMeta[tier].label}</h4>
+    </div>
+    <div className="selected-tier-coverage">{tierMeta[tier].coverage}</div>
+  </div>
 
-              <div className="addon-checks">
-                <label className="addon-check">
-                  <input type="checkbox" /> Round-trip booking discount
-                </label>
-                <label className="addon-check">
-                  <input type="checkbox" /> Overnight / multi-day luggage hold
-                </label>
-                <label className="addon-check">
-                  <input type="checkbox" /> Outside metro Atlanta delivery
-                </label>
-              </div>
+  <div className="form-row">
+    <label>Estimated number of bags</label>
+    <div className="bag-counter bag-counter-luxury">
+      <button
+        type="button"
+        onClick={() => setBags((b) => Math.max(1, b - 1))}
+      >
+        −
+      </button>
+      <span>{bags}</span>
+      <button type="button" onClick={() => setBags((b) => b + 1)}>
+        +
+      </button>
+    </div>
+    <small className="field-helper-simple">
+      Pricing updates automatically based on your selected tier and bag count.
+    </small>
+  </div>
 
-              <div className="estimate premium-estimate">
-                <div className="estimate-row">
-                  <span>Selected service</span>
-                  <span>${pricing[tier]}</span>
-                </div>
-                <div className="estimate-row">
-                  <span>Bags</span>
-                  <span>{bags}</span>
-                </div>
-                <div className="estimate-row total">
-                  <span>Estimated total</span>
-                  <span>${total}</span>
-                </div>
-              </div>
+  <div className="service-highlights">
+    <div className="service-highlight">
+      <span>Same-day delivery</span>
+      <strong>Included</strong>
+    </div>
+    <div className="service-highlight">
+      <span>Coverage</span>
+      <strong>{tierMeta[tier].coverage}</strong>
+    </div>
+    <div className="service-highlight">
+      <span>Best for</span>
+      <strong>
+        {tier === "basic"
+          ? "1–2 bags"
+          : tier === "premium"
+          ? "3–5 bags"
+          : "6+ bags"}
+      </strong>
+    </div>
+  </div>
 
-              <button className="btn btn-primary btn-full">
-                Get my pickup started
-              </button>
-              <p className="booking-footnote">
-                No app required to book. Payment and confirmations can be added
-                next.
-              </p>
-            </div>
+  <div className="estimate estimate-simple-luxury">
+    <div className="estimate-header-simple">
+      <span className="estimate-label-simple">Estimate summary</span>
+      <span className="estimate-tier-simple">{tierMeta[tier].label}</span>
+    </div>
+
+    <div className="estimate-row">
+      <span>Base service</span>
+      <span>${pricing[tier]}</span>
+    </div>
+    <div className="estimate-row">
+      <span>Bags</span>
+      <span>{bags}</span>
+    </div>
+    <div className="estimate-row total">
+      <span>Estimated total</span>
+      <span>${total}</span>
+    </div>
+
+    <p className="estimate-note-simple">
+      Add-ons like round-trip service, overnight hold, and outside-metro
+      delivery are confirmed during booking.
+    </p>
+  </div>
+
+  <a
+    href="https://calendly.com/connect-myqarryon/30min"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="btn btn-primary btn-full booking-cta-simple"
+  >
+    Continue to booking
+  </a>
+
+  <p className="booking-footnote booking-footnote-simple">
+    On the next step, you’ll confirm pickup location, drop-off location,
+    timing, and any add-ons.
+  </p>
+</div>
           </div>
         </section>
 
@@ -1933,213 +1934,372 @@ export default function Page() {
           line-height: 1.85;
         }
 
+ 
+
         .booking-section {
-          padding-top: 120px;
-          padding-bottom: 120px;
-        }
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
 
-        .booking-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 52px;
-          align-items: start;
-        }
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 52px;
+  align-items: start;
+}
 
-        .booking-copy h2 {
-          font-size: clamp(2rem, 4vw, 3.2rem);
-          color: var(--navy);
-          margin-bottom: 18px;
-        }
+.booking-copy h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--navy);
+  margin-bottom: 18px;
+}
 
-        .booking-benefits {
-          display: grid;
-          gap: 18px;
-          margin-top: 30px;
-        }
+.booking-benefits {
+  display: grid;
+  gap: 18px;
+  margin-top: 30px;
+}
 
-        .booking-benefit {
-          padding: 18px 20px;
-          border-radius: 18px;
-          background: #ffffff;
-          border: 1px solid rgba(16, 32, 48, 0.06);
-        }
+.booking-benefit {
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(16, 32, 48, 0.06);
+}
 
-        .booking-benefit strong {
-          display: block;
-          color: var(--navy);
-          margin-bottom: 6px;
-          font-family: var(--heading);
-        }
+.booking-benefit strong {
+  display: block;
+  color: var(--navy);
+  margin-bottom: 6px;
+  font-family: var(--heading);
+}
 
-        .booking-benefit span {
-          color: #66737f;
-          line-height: 1.8;
-        }
+.booking-benefit span {
+  color: #66737f;
+  line-height: 1.8;
+}
 
-        .booking-card {
-          background: white;
-          border: 1px solid rgba(16, 32, 48, 0.08);
-          border-radius: 28px;
-          padding: 30px;
-          box-shadow: var(--shadow);
-        }
+.booking-card {
+  background: white;
+  border: 1px solid rgba(16, 32, 48, 0.08);
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+}
 
-        .booking-card-premium {
-          border: 1px solid rgba(16, 32, 48, 0.08);
-          background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
-        }
+.booking-card-premium {
+  border: 1px solid rgba(16, 32, 48, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+}
 
-        .booking-card-head {
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          gap: 16px;
-          margin-bottom: 22px;
-        }
+.booking-card-luxury-simple {
+  box-shadow: 0 22px 60px rgba(9, 20, 31, 0.08);
+}
 
-        .booking-card-head h3 {
-          font-size: 1.5rem;
-          color: var(--navy);
-          margin-top: 6px;
-        }
+.booking-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
 
-        .booking-label {
-          font-size: 0.78rem;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          color: #7b8793;
-          font-family: var(--heading);
-          font-weight: 700;
-        }
+.booking-card-head h3 {
+  font-size: 1.5rem;
+  color: var(--navy);
+  margin-top: 6px;
+}
 
-        .booking-badge {
-          background: rgba(46, 196, 182, 0.1);
-          color: #178f84;
-          padding: 8px 12px;
-          border-radius: 999px;
-          font-size: 0.78rem;
-          font-weight: 700;
-          white-space: nowrap;
-        }
+.booking-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #7b8793;
+  font-family: var(--heading);
+  font-weight: 700;
+}
 
-        .form-row {
-          margin-bottom: 18px;
-        }
+.booking-badge {
+  background: rgba(46, 196, 182, 0.1);
+  color: #178f84;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
 
-        .form-row label {
-          display: block;
-          margin-bottom: 8px;
-          font-size: 0.84rem;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: #7a8793;
-          font-weight: 700;
-          font-family: var(--heading);
-        }
+.booking-subtext-simple {
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: #66737f;
+  line-height: 1.75;
+  max-width: 520px;
+}
 
-        input,
-        select {
-          width: 100%;
-          height: 52px;
-          border-radius: 14px;
-          border: 1px solid rgba(16, 32, 48, 0.1);
-          padding: 0 16px;
-          background: white;
-          color: var(--navy);
-        }
+.booking-tier-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
 
-        .two-col {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 14px;
-        }
+.tier-pill {
+  border: 1px solid rgba(16, 32, 48, 0.08);
+  background: white;
+  border-radius: 18px;
+  padding: 16px 14px;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
 
-        .two-col > div label {
-          display: block;
-          margin-bottom: 8px;
-        }
+.tier-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(9, 20, 31, 0.08);
+}
 
-        .bag-counter {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 16px;
-          border: 1px solid rgba(16, 32, 48, 0.1);
-          border-radius: 14px;
-          height: 52px;
-          padding: 0 10px;
-        }
+.tier-pill.active {
+  border-color: rgba(46, 196, 182, 0.45);
+  background: rgba(46, 196, 182, 0.08);
+  box-shadow: 0 14px 30px rgba(46, 196, 182, 0.14);
+}
 
-        .bag-counter button {
-          width: 36px;
-          height: 36px;
-          border-radius: 999px;
-          border: none;
-          background: rgba(46, 196, 182, 0.12);
-          color: var(--navy);
-          font-size: 1.25rem;
-          cursor: pointer;
-        }
+.tier-pill-name {
+  display: block;
+  color: var(--navy);
+  font-family: var(--heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
 
-        .bag-counter span {
-          font-weight: 700;
-          font-family: var(--heading);
-          color: var(--navy);
-        }
+.tier-pill-price {
+  display: block;
+  color: #5f6b77;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
 
-        .addon-checks {
-          display: grid;
-          gap: 10px;
-          margin: 10px 0 20px;
-        }
+.selected-tier-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: #f8fafb;
+  border: 1px solid rgba(16, 32, 48, 0.06);
+  margin-bottom: 18px;
+}
 
-        .addon-check {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          color: #55626f;
-        }
+.selected-tier-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #7b8793;
+  font-family: var(--heading);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
 
-        .addon-check input {
-          width: 16px;
-          height: 16px;
-        }
+.selected-tier-card h4 {
+  color: var(--navy);
+  font-size: 1.2rem;
+}
 
-        .estimate {
-          margin: 24px 0;
-          padding: 18px;
-          border-radius: 18px;
-          background: #f8fafb;
-          border: 1px solid rgba(16, 32, 48, 0.06);
-        }
+.selected-tier-coverage {
+  color: var(--teal);
+  font-family: var(--heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: right;
+}
 
-        .premium-estimate {
-          margin-top: 18px;
-        }
+.form-row {
+  margin-bottom: 18px;
+}
 
-        .estimate-row {
-          display: flex;
-          justify-content: space-between;
-          gap: 16px;
-          padding: 8px 0;
-          color: #5f6b77;
-        }
+.form-row label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #7a8793;
+  font-weight: 700;
+  font-family: var(--heading);
+}
 
-        .estimate-row.total {
-          margin-top: 8px;
-          padding-top: 14px;
-          border-top: 1px solid rgba(16, 32, 48, 0.08);
-          color: var(--navy);
-          font-weight: 700;
-        }
+.bag-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid rgba(16, 32, 48, 0.1);
+  border-radius: 14px;
+  height: 52px;
+  padding: 0 10px;
+}
 
-        .booking-footnote {
-          margin-top: 14px;
-          text-align: center;
-          color: #7a8793;
-          font-size: 0.92rem;
-          line-height: 1.6;
-        }
+.bag-counter-luxury {
+  max-width: 200px;
+  background: white;
+}
+
+.bag-counter button {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(46, 196, 182, 0.12);
+  color: var(--navy);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.bag-counter span {
+  font-weight: 700;
+  font-family: var(--heading);
+  color: var(--navy);
+}
+
+.field-helper-simple {
+  display: block;
+  margin-top: 8px;
+  color: #7a8793;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.service-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.service-highlight {
+  background: white;
+  border: 1px solid rgba(16, 32, 48, 0.06);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.service-highlight span {
+  display: block;
+  color: #7a8793;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  font-family: var(--heading);
+  font-weight: 700;
+}
+
+.service-highlight strong {
+  color: var(--navy);
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.estimate {
+  margin: 24px 0;
+  padding: 18px;
+  border-radius: 18px;
+  background: #f8fafb;
+  border: 1px solid rgba(16, 32, 48, 0.06);
+}
+
+.estimate-simple-luxury {
+  background: linear-gradient(180deg, #0d1b2a 0%, #132538 100%);
+  border: none;
+  padding: 22px;
+  box-shadow: 0 20px 44px rgba(13, 27, 42, 0.18);
+}
+
+.estimate-header-simple {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.estimate-label-simple {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: var(--heading);
+  font-weight: 700;
+}
+
+.estimate-tier-simple {
+  color: var(--teal);
+  font-family: var(--heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.estimate-simple-luxury .estimate-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  color: rgba(255, 255, 255, 0.86);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.estimate-simple-luxury .estimate-row.total {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: none;
+  border-bottom: none;
+  color: white;
+  font-weight: 700;
+}
+
+.estimate-note-simple {
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.booking-cta-simple {
+  min-height: 56px;
+  border-radius: 16px;
+  font-size: 1rem;
+}
+
+.booking-footnote {
+  margin-top: 14px;
+  text-align: center;
+  color: #7a8793;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.booking-footnote-simple {
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 980px) {
+  .booking-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-tier-preview,
+  .service-highlights {
+    grid-template-columns: 1fr;
+  }
+}
 
         .faq-list {
           display: grid;

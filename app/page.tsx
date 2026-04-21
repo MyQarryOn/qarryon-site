@@ -838,7 +838,7 @@ export default function Page() {
     rel="noopener noreferrer"
     className="btn btn-primary btn-full booking-cta-simple"
   >
-    Continue to booking
+    Secure your pickup
   </a>
 
   <p className="booking-footnote booking-footnote-simple">

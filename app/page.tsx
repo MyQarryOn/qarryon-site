@@ -26,35 +26,35 @@ export default function Page() {
     basic: {
       label: "Qarry Lite",
       coverage: "$5K coverage",
-      service: "Qarry Lite",
+      service: "Simple & Scheduled",
       courier: "Courier assigned",
       status: "Picked up at 1:42 PM",
       routeTo: "Buckhead",
       progress: "52% complete",
       eta: "ETA 3:55 PM",
-      verification: "Standard delivery flow",
+      verification: "Scheduled handoff",
     },
     premium: {
       label: "Qarry Plus",
       coverage: "$25K coverage",
-      service: "Qarry Plus",
+      service: "Flexible Coordination",
       courier: "Courier assigned",
       status: "Picked up at 2:14 PM",
       routeTo: "Midtown",
       progress: "68% complete",
       eta: "En route to Midtown",
-      verification: "Verified delivery required",
+      verification: "Confirmed delivery included",
     },
     vip: {
       label: "Qarry Elite",
       coverage: "$100K coverage",
-      service: "Qarry Elite",
+      service: "Priority Concierge",
       courier: "Courier assigned",
       status: "Picked up at 2:14 PM",
       routeTo: "Buckhead",
       progress: "82% complete",
       eta: "En route to Buckhead",
-      verification: "Verified delivery required",
+      verification: "Confirmed delivery included",
     },
   };
 
@@ -66,31 +66,87 @@ export default function Page() {
   }, [bags, tier]);
 
   const faqs = [
-    {
-      q: "How far in advance do I need to book?",
-      a: "Standard bookings are best made a bit ahead of time, but Qarry Plus and Qarry Elite requests are designed for faster turnaround when availability allows. If you have a tighter travel day, book as early as you can and we’ll prioritize the smoothest handoff possible.",
-    },
-    {
-      q: "Do you serve Hartsfield-Jackson Airport (ATL)?",
-      a: "Yes. ATL is central to the QarryOn experience. We support airport-to-hotel, airport-to-Airbnb, hotel-to-airport, and similar same-day handoffs across Atlanta’s main travel corridors.",
-    },
-    {
-      q: "Can I track my luggage in real time?",
-      a: "Yes. QarryOn is designed around visibility and confidence. You’ll know when your bags are picked up, in transit, and delivered so you’re not guessing where they are during your travel day.",
-    },
-    {
-      q: "What areas do you cover?",
-      a: "We begin with Atlanta’s core travel corridors and destinations roughly within 15 minutes outside the I-285 perimeter. Requests beyond metro Atlanta can be quoted separately.",
-    },
-    {
-      q: "Do you offer round-trip service?",
-      a: "Yes. Travelers can book QarryOn for both arrival and departure support, and round-trip bookings can include a built-in incentive depending on the service setup.",
-    },
-    {
-      q: "What if I have more bags, special timing, or a group?",
-      a: "That’s exactly what Qarry Elite is for. QarryOn can support families, events, business travelers, and higher-touch luggage coordination with more flexible service planning.",
-    },
-  ];
+  {
+    question: "How far in advance do I need to book?",
+    answer:
+      "Standard bookings are best made a bit ahead of time, but Qarry Plus and Qarry Elite requests are designed for faster turnaround when availability allows. If you have a tighter travel day, book as early as you can and we’ll prioritize the smoothest handoff possible.",
+  },
+  {
+    question: "What does same-day service mean?",
+    answer:
+      "Same-day service means your luggage is picked up and delivered within the same day during our standard service hours: 8:00 AM – 10:00 PM. Extended hours may be available upon request depending on availability.",
+  },
+  {
+    question: "Where can you deliver my luggage?",
+    answer:
+      "We deliver to hotels, Airbnbs, homes, event venues, offices, and airport departure areas. Your luggage must be handed directly to a QarryOn courier or designated person at pickup.",
+  },
+  {
+    question: "Can I change my delivery location?",
+    answer:
+      "Yes. Plans change. Delivery locations can be updated by texting your QarryOn courier or contacting dispatch. Same-area adjustments are typically $10–$15. Major changes based on distance, timing, or complexity are recalculated. Plus includes one free reasonable adjustment, and Elite includes flexible changes within reason.",
+  },
+  {
+    question: "What if I land late but need my luggage the next morning?",
+    answer:
+      "We can coordinate evening pickup and next-morning delivery when available. This is ideal if you land late and go straight to an event, concert, dinner, or meeting, and want your luggage delivered when you’re ready the next day. Extended-hour or overnight coordination may include an additional fee.",
+  },
+  {
+    question: "Do I need to be present for pickup?",
+    answer:
+      "Yes. Luggage must be handed directly to your QarryOn courier by you or a designated person, such as hotel staff, a host, concierge, or trusted contact. We do not retrieve unattended luggage without an approved handoff.",
+  },
+  {
+    question: "What does confirmed delivery mean?",
+    answer:
+      "Confirmed delivery means your luggage is delivered directly to you, a designated recipient, concierge, front desk, or approved secure location. We send confirmation by text and may include photo confirmation when appropriate.",
+  },
+  {
+    question: "Can you leave my luggage in a locker, porch, or secure location?",
+    answer:
+      "Yes, if you provide clear instructions and the location is safe and accessible. For unattended delivery, QarryOn will confirm placement by text and may send photo confirmation. Customer approval is required before leaving luggage unattended.",
+  },
+  {
+    question: "What is Airport Delivery (Timed)?",
+    answer:
+      "Airport Delivery (Timed) means we bring your luggage back to you at the airport around your departure time, so you can enjoy the city after checkout without returning to your hotel or Airbnb.",
+  },
+  {
+    question: "Do you support private airports or FBOs?",
+    answer:
+      "Private aviation and FBO-related pickups or deliveries may be available upon request. We can coordinate luggage movement from approved handoff locations as long as access, timing, and security requirements allow it.",
+  },
+  {
+    question: "What happens if my flight is delayed?",
+    answer:
+      "Contact us as soon as your timing changes. We’ll do our best to adjust your pickup or delivery window. Depending on the tier, timing, and route impact, a change fee may apply.",
+  },
+  {
+    question: "Do you serve Hartsfield-Jackson Airport (ATL)?",
+    answer:
+      "Yes. ATL is central to the QarryOn experience. We support airport-to-hotel, airport-to-Airbnb, hotel-to-airport, and similar same-day handoffs across Atlanta’s main travel corridors.",
+  },
+  {
+    question: "Can I track my luggage in real time?",
+    answer:
+      "Yes. QarryOn is designed around visibility and confidence. You’ll know when your bags are picked up, in transit, and delivered so you’re not guessing where they are during your travel day.",
+  },
+  {
+    question: "What areas does QarryOn currently serve?",
+    answer:
+      "QarryOn currently serves Atlanta within the I-285 perimeter, including Midtown, Downtown, Buckhead, West Midtown, and surrounding neighborhoods. Service outside this area is available upon request and may include an additional fee.",
+  },
+  {
+    question: "Do you offer round-trip service?",
+    answer:
+      "Yes. Travelers can book QarryOn for both arrival and departure support, and round-trip bookings may include a built-in incentive depending on the service setup.",
+  },
+  {
+    question: "What if I have more bags, special timing, or a group?",
+    answer:
+      "That’s exactly what Qarry Elite is designed for. QarryOn can support families, events, business travelers, and more complex luggage coordination with flexible service planning.",
+  },
+];
 
   return (
     <>
@@ -193,10 +249,10 @@ export default function Page() {
                 <div className="glass-card-back glass-card-back-one" />
 
                 <div className="glass-card-main">
-                  <div className="live-badge">
+                  <a className="live-badge live-badge-link" href="#booking">
                     <span className="live-dot" />
                     Live Tracking
-                  </div>
+                  </a>
 
                   <div className="card-status-block">
                     <div className="status-chip">{tierMeta[tier].status}</div>
@@ -279,10 +335,10 @@ export default function Page() {
         <section className="trust-strip trust-strip-dark">
           <div className="container trust-strip-grid">
             <div className="trust-pill trust-pill-dark">Real-time tracking</div>
-            <div className="trust-pill trust-pill-dark">Verified handoff</div>
-            <div className="trust-pill trust-pill-dark">White-glove handling</div>
+            <div className="trust-pill trust-pill-dark">Confirmed handoff</div>
+            <div className="trust-pill trust-pill-dark">Concierge handling</div>
             <div className="trust-pill trust-pill-dark">
-              Door-to-door delivery
+              Hotel, Airbnb & airport delivery
             </div>
           </div>
         </section>
@@ -516,7 +572,7 @@ export default function Page() {
                 <div className="journey-icon">
                   <Plane size={24} strokeWidth={1.75} />
                 </div>
-                <div className="journey-label">Airport Return Later</div>
+                <div className="journey-label">Airport Delivery (Timed)</div>
               </div>
             </div>
 
@@ -569,13 +625,15 @@ export default function Page() {
                 <div className="tier-label">Qarry Lite</div>
                 <div className="price">$39</div>
                 <p>
-                  Straightforward support for travelers who want a simple,
-                  same-day handoff between the airport and their stay.
+                  Simple, scheduled luggage handling for straightforward travel
+                  days with a fixed pickup and delivery plan.
                 </p>
                 <ul>
-                  <li>Best for direct same-day handoffs</li>
+                  <li>Same-day luggage pickup and delivery</li>
+                  <li>Fixed pickup and delivery window</li>
+                  <li>Standard text updates</li>
                   <li>Designed for 1–2 bags</li>
-                  <li>Standard delivery flow</li>
+                  <li>Changes billed separately</li>
                 </ul>
                 <button
                   className="btn btn-secondary btn-full"
@@ -600,13 +658,15 @@ export default function Page() {
                 <div className="tier-label">Qarry Plus</div>
                 <div className="price">$59</div>
                 <p>
-                  A smoother, more flexible option for travelers with more bags
-                  or a little more coordination on the day.
+                  Flexible coordination for travelers whose timing or location
+                  may shift during the day.
                 </p>
                 <ul>
-                  <li>Flexible same-day coordination</li>
+                  <li>Everything in Qarry Lite</li>
+                  <li>Adjustable delivery window</li>
+                  <li>One free reasonable location or timing adjustment</li>
+                  <li>Confirmed delivery via handoff or photo</li>
                   <li>Designed for 3–5 bags</li>
-                  <li>Verified delivery required</li>
                 </ul>
                 <button
                   className="btn btn-primary btn-full"
@@ -626,13 +686,15 @@ export default function Page() {
                 <div className="tier-label">Qarry Elite</div>
                 <div className="price">$95</div>
                 <p>
-                  Elevated support for larger groups, premium travel days, or
-                  higher-touch luggage coordination.
+                  Priority concierge support for tight schedules, complex
+                  routes, groups, events, or high-stakes travel days.
                 </p>
                 <ul>
-                  <li>Priority, premium coordination</li>
+                  <li>Everything in Qarry Plus</li>
+                  <li>Priority routing and handling</li>
+                  <li>Flexible timing and reasonable changes included</li>
+                  <li>Proactive status updates</li>
                   <li>Designed for 6+ bags</li>
-                  <li>Ideal for families, groups, or events</li>
                 </ul>
                 <button
                   className="btn btn-secondary btn-full"
@@ -840,16 +902,16 @@ export default function Page() {
             </div>
 
             <div className="trust-card-grid">
-              <div className="trust-card">
+              <a className="trust-card trust-card-link" href="#booking">
                 <div className="trust-card-icon">
                   <Target size={22} strokeWidth={1.75} />
                 </div>
                 <h3>Real-Time Tracking</h3>
                 <p>
-                  Live GPS from the moment we pick up. You&apos;ll know exactly
-                  where your bags are — at every moment.
+                  Clear pickup, transit, and delivery updates so you know where
+                  your bags are during your travel day.
                 </p>
-              </div>
+              </a>
 
               <div className="trust-card">
                 <div className="trust-card-icon">
@@ -858,7 +920,7 @@ export default function Page() {
                 <h3>Insured Up to $100K</h3>
                 <p>
                   Every bag, every delivery. Lite covers $5K. Elite covers
-                  $100,000 per bag with signature confirmation.
+                  $100,000 per bag with confirmed delivery.
                 </p>
               </div>
 
@@ -866,7 +928,7 @@ export default function Page() {
                 <div className="trust-card-icon">
                   <Check size={22} strokeWidth={1.9} />
                 </div>
-                <h3>Premium coordination</h3>
+                <h3>Concierge coordination</h3>
                 <p>
                   Designed for travelers who want fewer moving parts, cleaner
                   timing, and more confidence between airport and stay.
@@ -878,27 +940,33 @@ export default function Page() {
 
         <section className="section-divider"></section>
 
-        <section id="faq" className="section section-soft">
-          <div className="container narrow">
-            <div className="section-head">
-              <div className="eyebrow">FAQs</div>
+        <section id="faq" className="faq-section section-soft">
+          <div className="container faq-inner">
+            <div className="section-head faq-head">
+              <div className="eyebrow coral">FAQs</div>
               <h2>Questions, answered.</h2>
+              <p className="section-sub">
+                Clear answers on timing, delivery locations, tracking, and flexible coordination.
+              </p>
             </div>
 
             <div className="faq-list">
               {faqs.map((item, i) => (
                 <div
-                  key={item.q}
+                  key={`${item.question}-${i}`}
                   className={`faq-item ${faqOpen === i ? "open" : ""}`}
                 >
                   <button
+                    type="button"
                     className="faq-question"
                     onClick={() => setFaqOpen(faqOpen === i ? null : i)}
+                    aria-expanded={faqOpen === i}
                   >
-                    <span>{item.q}</span>
-                    <span>{faqOpen === i ? "−" : "+"}</span>
+                    <span>{item.question}</span>
+                    <span className="faq-icon">{faqOpen === i ? "−" : "+"}</span>
                   </button>
-                  {faqOpen === i && <div className="faq-answer">{item.a}</div>}
+
+                  {faqOpen === i && <p className="faq-answer">{item.answer}</p>}
                 </div>
               ))}
             </div>
@@ -1341,6 +1409,10 @@ export default function Page() {
           text-transform: uppercase;
           color: rgba(255, 255, 255, 0.84);
           margin-bottom: 14px;
+        }
+
+        .live-badge-link:hover {
+          color: white;
         }
 
         .live-dot {
@@ -1959,6 +2031,11 @@ export default function Page() {
           line-height: 1.85;
         }
 
+        .trust-card-link {
+          display: block;
+          color: inherit;
+        }
+
         .booking-section {
           padding-top: 120px;
           padding-bottom: 120px;
@@ -2313,6 +2390,19 @@ export default function Page() {
           margin-right: auto;
         }
 
+        .faq-section {
+          padding: 112px 0;
+          background: #f8fafb;
+        }
+
+        .faq-inner {
+          max-width: 980px;
+        }
+
+        .faq-head {
+          margin-bottom: 44px;
+        }
+
         .faq-list {
           display: grid;
           gap: 14px;
@@ -2321,30 +2411,46 @@ export default function Page() {
         .faq-item {
           background: white;
           border: 1px solid rgba(16, 32, 48, 0.08);
-          border-radius: 18px;
-          padding: 0 22px;
+          border-radius: 22px;
+          overflow: hidden;
+          box-shadow: 0 14px 34px rgba(9, 20, 31, 0.04);
+        }
+
+        .faq-item.open {
+          border-color: rgba(46, 196, 182, 0.28);
+          box-shadow: 0 18px 42px rgba(46, 196, 182, 0.08);
         }
 
         .faq-question {
           width: 100%;
           background: transparent;
           border: none;
-          padding: 22px 0;
+          padding: 22px 26px;
           display: flex;
           justify-content: space-between;
+          align-items: center;
           gap: 24px;
           text-align: left;
           color: var(--navy);
           font-family: var(--heading);
-          font-size: 1rem;
-          font-weight: 600;
+          font-size: 1.06rem;
+          font-weight: 700;
           cursor: pointer;
         }
 
+        .faq-icon {
+          flex: 0 0 auto;
+          color: var(--teal);
+          font-size: 1.5rem;
+          line-height: 1;
+        }
+
         .faq-answer {
-          padding: 0 0 22px;
+          margin: 0;
+          padding: 0 26px 26px;
           color: #64707d;
           line-height: 1.85;
+          max-width: 860px;
         }
 
         .final-cta {

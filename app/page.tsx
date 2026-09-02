@@ -25,7 +25,7 @@ export default function Page() {
   const tierMeta = {
     basic: {
       label: "Qarry Lite",
-      coverage: "$5K coverage",
+      handling: "Secure handling",
       service: "Simple & Scheduled",
       courier: "Courier assigned",
       status: "Picked up at 1:42 PM",
@@ -36,7 +36,7 @@ export default function Page() {
     },
     premium: {
       label: "Qarry Plus",
-      coverage: "$25K coverage",
+      handling: "Verified handling",
       service: "Flexible Coordination",
       courier: "Courier assigned",
       status: "Picked up at 2:14 PM",
@@ -47,7 +47,7 @@ export default function Page() {
     },
     vip: {
       label: "Qarry Elite",
-      coverage: "$100K coverage",
+      handling: "Priority handling",
       service: "Priority Concierge",
       courier: "Courier assigned",
       status: "Picked up at 2:14 PM",
@@ -230,8 +230,8 @@ export default function Page() {
                   <span className="proof-label">Pickup & delivery</span>
                 </div>
                 <div className="proof-item">
-                  <span className="proof-num">$100K</span>
-                  <span className="proof-label">Max coverage tier</span>
+                  <span className="proof-num">Tracked</span>
+                  <span className="proof-label">Pickup to delivery</span>
                 </div>
               </div>
             </div>
@@ -316,9 +316,9 @@ export default function Page() {
                   </div>
 
                   <div className="card-detail-row">
-                    <span className="card-detail-label">Coverage</span>
+                    <span className="card-detail-label">Handling</span>
                     <span className="card-detail-value teal-text">
-                      {tierMeta[tier].coverage}
+                      {tierMeta[tier].handling}
                     </span>
                   </div>
                 </div>
@@ -371,15 +371,15 @@ export default function Page() {
 
               <div className="booking-benefits">
                 <div className="booking-benefit">
-                  <strong>Insured from pickup</strong>
+                  <strong>Tracked handoff</strong>
                   <span>
-                    Every bag is covered the moment our courier arrives.
+                    Clear confirmation from pickup through final delivery.
                   </span>
                 </div>
                 <div className="booking-benefit">
-                  <strong>Free cancellation</strong>
+                  <strong>Flexible coordination</strong>
                   <span>
-                    Up to 2 hours before. No penalty, no questions.
+                    Travel plans shift. We’ll work with you when timing changes.
                   </span>
                 </div>
                 <div className="booking-benefit">
@@ -439,8 +439,8 @@ export default function Page() {
                   <div className="selected-tier-label">Selected tier</div>
                   <h4>{tierMeta[tier].label}</h4>
                 </div>
-                <div className="selected-tier-coverage">
-                  {tierMeta[tier].coverage}
+                <div className="selected-tier-handling">
+                  {tierMeta[tier].handling}
                 </div>
               </div>
 
@@ -470,7 +470,7 @@ export default function Page() {
                   <strong>Included</strong>
                 </div>
                 <div className="service-highlight">
-                  <span>Coverage</span>
+                  <span>Handling</span>
                   <strong>{tierMeta[tier].coverage}</strong>
                 </div>
                 <div className="service-highlight">
@@ -917,10 +917,9 @@ export default function Page() {
                 <div className="trust-card-icon">
                   <ShieldCheck size={22} strokeWidth={1.75} />
                 </div>
-                <h3>Insured Up to $100K</h3>
+                <h3>Verified Handoffs</h3>
                 <p>
-                  Every bag, every delivery. Lite covers $5K. Elite covers
-                  $100,000 per bag with confirmed delivery.
+                  Clear pickup and delivery confirmation helps create accountability from the first handoff through final delivery.
                 </p>
               </div>
 
@@ -2211,7 +2210,7 @@ export default function Page() {
           font-size: 1.2rem;
         }
 
-        .selected-tier-coverage {
+        .selected-tier-handling {
           color: var(--teal);
           font-family: var(--heading);
           font-weight: 700;
@@ -2699,7 +2698,7 @@ export default function Page() {
           }
 
           .booking-badge,
-          .selected-tier-coverage {
+          .selected-tier-handling {
             text-align: left;
           }
 

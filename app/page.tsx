@@ -17,9 +17,9 @@ export default function Page() {
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
 
   const pricing = {
-    basic: 39,
-    premium: 59,
-    vip: 95,
+    basic: 54,
+    premium: 74,
+    vip: 110,
   };
 
   const tierMeta = {
@@ -412,7 +412,7 @@ export default function Page() {
                   onClick={() => setTier("basic")}
                 >
                   <span className="tier-pill-name">Qarry Lite</span>
-                  <span className="tier-pill-price">$39</span>
+                  <span className="tier-pill-price">$54</span>
                 </button>
 
                 <button
@@ -421,7 +421,7 @@ export default function Page() {
                   onClick={() => setTier("premium")}
                 >
                   <span className="tier-pill-name">Qarry Plus</span>
-                  <span className="tier-pill-price">$59</span>
+                  <span className="tier-pill-price">$74</span>
                 </button>
 
                 <button
@@ -430,7 +430,7 @@ export default function Page() {
                   onClick={() => setTier("vip")}
                 >
                   <span className="tier-pill-name">Qarry Elite</span>
-                  <span className="tier-pill-price">$95</span>
+                  <span className="tier-pill-price">$110</span>
                 </button>
               </div>
 
@@ -623,7 +623,7 @@ export default function Page() {
             <div className="pricing-grid">
               <div className={`price-card ${tier === "basic" ? "active" : ""}`}>
                 <div className="tier-label">Qarry Lite</div>
-                <div className="price">$39</div>
+                <div className="price">$54</div>
                 <p>
                   Simple, scheduled luggage handling for straightforward travel
                   days with a fixed pickup and delivery plan.
@@ -656,7 +656,7 @@ export default function Page() {
               >
                 <div className="featured-badge">Most popular</div>
                 <div className="tier-label">Qarry Plus</div>
-                <div className="price">$59</div>
+                <div className="price">$74</div>
                 <p>
                   Flexible coordination for travelers whose timing or location
                   may shift during the day.
@@ -684,7 +684,7 @@ export default function Page() {
 
               <div className={`price-card ${tier === "vip" ? "active" : ""}`}>
                 <div className="tier-label">Qarry Elite</div>
-                <div className="price">$95</div>
+                <div className="price">$110</div>
                 <p>
                   Priority concierge support for tight schedules, complex
                   routes, groups, events, or high-stakes travel days.

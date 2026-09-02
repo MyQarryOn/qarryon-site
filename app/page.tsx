@@ -1015,6 +1015,7 @@ export default function Page() {
                 <h4>Support</h4>
                 <a href="#booking">Schedule Pickup</a>
                 <a href="#faq">FAQs</a>
+                <a href="/terms">Terms & Conditions</a>
                 <a href="mailto:connect@myqarryon.com">Email Us</a>
               </div>
 

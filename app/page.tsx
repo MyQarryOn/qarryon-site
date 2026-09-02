@@ -471,7 +471,7 @@ export default function Page() {
                 </div>
                 <div className="service-highlight">
                   <span>Handling</span>
-                  <strong>{tierMeta[tier].coverage}</strong>
+                  <strong>{tierMeta[tier].handling}</strong>
                 </div>
                 <div className="service-highlight">
                   <span>Best for</span>

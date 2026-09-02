@@ -129,7 +129,7 @@ export default function Page() {
   {
     question: "Can I track my luggage in real time?",
     answer:
-      "Yes. QarryOn is designed around visibility and confidence. You’ll know when your bags are picked up, in transit, and delivered so you’re not guessing where they are during your travel day.",
+      "Every QarryOn booking includes real-time journey updates from arrival and pickup through secure hold, en route, delivery, and service completion. For travelers who want additional location visibility, AirTag tracking is available as an optional add-on.",
   },
   {
     question: "What areas does QarryOn currently serve?",
@@ -251,7 +251,7 @@ export default function Page() {
                 <div className="glass-card-main">
                   <a className="live-badge live-badge-link" href="#booking">
                     <span className="live-dot" />
-                    Live Tracking
+                    Real-Time Journey Updates
                   </a>
 
                   <div className="card-status-block">
@@ -334,7 +334,7 @@ export default function Page() {
 
         <section className="trust-strip trust-strip-dark">
           <div className="container trust-strip-grid">
-            <div className="trust-pill trust-pill-dark">Real-time tracking</div>
+            <div className="trust-pill trust-pill-dark">Real-time updates</div>
             <div className="trust-pill trust-pill-dark">Confirmed handoff</div>
             <div className="trust-pill trust-pill-dark">Concierge handling</div>
             <div className="trust-pill trust-pill-dark">
@@ -590,8 +590,7 @@ export default function Page() {
                 <div className="step-icon">02</div>
                 <h3>We handle your bags</h3>
                 <p>
-                  A vetted, rated courier collects your luggage and transports it
-                  securely with real-time visibility throughout the trip.
+                  A vetted, rated courier collects your luggage and keeps you updated from pickup through secure hold, transit, and delivery.
                 </p>
               </div>
 
@@ -906,10 +905,9 @@ export default function Page() {
                 <div className="trust-card-icon">
                   <Target size={22} strokeWidth={1.75} />
                 </div>
-                <h3>Real-Time Tracking</h3>
+                <h3>Journey Updates</h3>
                 <p>
-                  Clear pickup, transit, and delivery updates so you know where
-                  your bags are during your travel day.
+                  Clear updates from arrival and pickup through secure hold, transit, delivery, and service completion.
                 </p>
               </a>
 
@@ -1017,8 +1015,7 @@ export default function Page() {
                 <h4>Support</h4>
                 <a href="#booking">Schedule Pickup</a>
                 <a href="#faq">FAQs</a>
-                <a href="mailto:hello@qarryon.com">Contact</a>
-                <a href="mailto:hello@qarryon.com">Email Us</a>
+                <a href="mailto:connect@myqarryon.com">Email Us</a>
               </div>
 
               <div className="footer-col">
@@ -1034,7 +1031,7 @@ export default function Page() {
           <div className="container footer-bottom">
             <span>© 2026 QarryOn. All rights reserved.</span>
             <div className="footer-bottom-links">
-              <a href="mailto:hello@qarryon.com">hello@qarryon.com</a>
+              <a href="mailto:connect@myqarryon.com">connect@myqarryon.com</a>
               <span>Atlanta, GA</span>
             </div>
           </div>

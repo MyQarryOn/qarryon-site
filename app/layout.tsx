@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import StructuredData from "./structured-data";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,9 +14,37 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QarryOn | Luggage Concierge in Atlanta",
-  description: "Same-day luggage pickup and delivery across Atlanta — airport, hotel, Airbnb, and beyond.",
-  };
+  metadataBase: new URL("https://www.myqarryon.com"),
+
+  title: {
+    default: "Atlanta Luggage Concierge, Storage & Delivery | QarryOn",
+    template: "%s | QarryOn",
+  },
+
+  description:
+    "QarryOn provides same-day luggage pickup, secure hold and delivery across Atlanta. From ATL Airport to hotels, Airbnbs and more, we handle your bags so you can move freely.",
+
+  alternates: {
+    canonical: "/",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "QarryOn",
+    title: "Atlanta Luggage Concierge, Storage & Delivery | QarryOn",
+    description:
+      "QarryOn provides same-day luggage pickup, secure hold and delivery across Atlanta. From ATL Airport to hotels, Airbnbs and more, we handle your bags so you can move freely.",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Atlanta Luggage Concierge, Storage & Delivery | QarryOn",
+    description:
+      "QarryOn provides same-day luggage pickup, secure hold and delivery across Atlanta. From ATL Airport to hotels, Airbnbs and more, we handle your bags so you can move freely.",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -27,7 +56,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+  <StructuredData />
+  {children}
+</body>
     </html>
   );
 }

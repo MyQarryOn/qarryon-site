@@ -2,9 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy Policy | QarryOn",
+  title: "Privacy Policy",
   description:
     "Learn how QarryOn collects, uses, protects, and shares information provided in connection with luggage concierge services.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 const sections = [

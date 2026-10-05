@@ -2,9 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Terms & Conditions | QarryOn",
+  title: "Terms & Conditions",
   description:
     "Terms and conditions governing QarryOn luggage pickup, secure hold, transportation, and delivery services.",
+  alternates: {
+    canonical: "/terms",
+  },
 };
 
 const sections = [

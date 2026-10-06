@@ -8,6 +8,7 @@ import {
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { TrackingLink } from "./analytics-links";
 import "./airport.css";
 
 export const metadata: Metadata = {
@@ -118,9 +119,13 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
               <a href="#faq">FAQs</a>
             </div>
 
-            <Link href="/#booking" className="airport-btn airport-btn-dark">
+            <TrackingLink
+              href="/#booking"
+              source="atl_nav_get_instant_estimate"
+              className="airport-btn airport-btn-dark"
+            >
               Get Instant Estimate
-            </Link>
+            </TrackingLink>
           </div>
         </nav>
 
@@ -158,9 +163,13 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
               </p>
 
               <div className="airport-actions">
-                <Link href="/#booking" className="airport-btn airport-btn-primary">
+                <TrackingLink
+                  href="/#booking"
+                  source="atl_hero"
+                  className="airport-btn airport-btn-primary"
+                >
                   Get Instant Estimate
-                </Link>
+                </TrackingLink>
 
                 <a
                   href="#how"
@@ -560,12 +569,14 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
           <li>Changes billed separately</li>
         </ul>
 
-        <Link
+        <TrackingLink
           href="/#booking"
+          source="atl_pricing_lite"
+          tier="Qarry Lite"
           className="airport-btn airport-btn-secondary airport-price-btn"
         >
           Estimate Qarry Lite
-        </Link>
+        </TrackingLink>
       </div>
 
       <div className="airport-price-card airport-price-featured">
@@ -586,12 +597,14 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
           <li>Designed for 3–5 bags</li>
         </ul>
 
-        <Link
+        <TrackingLink
           href="/#booking"
+          source="atl_pricing_plus"
+          tier="Qarry Plus"
           className="airport-btn airport-btn-primary airport-price-btn"
         >
           Estimate Qarry Plus
-        </Link>
+        </TrackingLink>
       </div>
 
       <div className="airport-price-card">
@@ -611,12 +624,14 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
           <li>Designed for 6+ bags</li>
         </ul>
 
-        <Link
+        <TrackingLink
           href="/#booking"
+          source="atl_pricing_elite"
+          tier="Qarry Elite"
           className="airport-btn airport-btn-secondary airport-price-btn"
         >
           Estimate Qarry Elite
-        </Link>
+        </TrackingLink>
       </div>
     </div>
 
@@ -683,9 +698,13 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
               coordinate the rest.
             </p>
 
-            <Link href="/#booking" className="airport-btn airport-btn-primary">
+            <TrackingLink
+              href="/#booking"
+              source="atl_final_cta"
+              className="airport-btn airport-btn-primary"
+            >
               Get Instant Estimate
-            </Link>
+            </TrackingLink>
           </div>
         </section>
 

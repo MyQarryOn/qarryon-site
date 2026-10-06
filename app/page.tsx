@@ -1,5 +1,9 @@
 "use client";
 
+import {
+  trackEstimateStarted,
+  trackBookingStarted,
+} from "./analytics";
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import {
@@ -102,16 +106,25 @@ export default function Page() {
             </a>
 
             <div className="nav-links">
-              <a href="#booking">Instant Estimate</a>
+              <a
+  href="#booking"
+  onClick={() => trackEstimateStarted("nav_instant_estimate")}
+>
+  Instant Estimate
+</a>
               <a href="#how">How it Works</a>
               <a href="#pricing">Pricing</a>
               <a href="#use-cases">Use Cases</a>
               <a href="#faq">FAQs</a>
             </div>
 
-            <a className="btn btn-dark nav-cta-btn" href="#booking">
-              Get Instant Estimate
-            </a>
+            <a
+  className="btn btn-dark nav-cta-btn"
+  href="#booking"
+  onClick={() => trackEstimateStarted("nav_get_instant_estimate")}
+>
+  Get Instant Estimate
+</a>
           </div>
         </nav>
 
@@ -146,9 +159,13 @@ export default function Page() {
               </p>
 
               <div className="hero-actions">
-                <a className="btn btn-primary" href="#booking">
-                  Get Instant Estimate
-                </a>
+                <a
+  className="btn btn-primary"
+  href="#booking"
+  onClick={() => trackEstimateStarted("hero_get_instant_estimate")}
+>
+  Get Instant Estimate
+</a>
                 <a
                   className="btn btn-secondary btn-secondary-glass"
                   href="#how"
@@ -454,6 +471,7 @@ export default function Page() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary btn-full booking-cta-simple"
+                onClick={() => trackBookingStarted("secure_your_pickup")}
               >
                 Secure your pickup
               </a>
@@ -575,6 +593,7 @@ export default function Page() {
                   className="btn btn-secondary btn-full"
                   onClick={() => {
                     setTier("basic");
+                    trackEstimateStarted("pricing", "Qarry Lite");
                     document.getElementById("booking")?.scrollIntoView({
                       behavior: "smooth",
                       block: "start",
@@ -608,6 +627,7 @@ export default function Page() {
                   className="btn btn-primary btn-full"
                   onClick={() => {
                     setTier("premium");
+                    trackEstimateStarted("pricing", "Qarry Plus");
                     document.getElementById("booking")?.scrollIntoView({
                       behavior: "smooth",
                       block: "start",
@@ -636,6 +656,7 @@ export default function Page() {
                   className="btn btn-secondary btn-full"
                   onClick={() => {
                     setTier("vip");
+                    trackEstimateStarted("pricing", "Qarry Elite");
                     document.getElementById("booking")?.scrollIntoView({
                       behavior: "smooth",
                       block: "start",
@@ -697,7 +718,11 @@ export default function Page() {
                   </p>
                 </div>
 
-                <a href="#booking" className="use-link-qarryon">
+                <a
+                  href="#booking"
+                  className="use-link-qarryon"
+                  onClick={() => trackEstimateStarted("use_case_airport_transfer")}
+                >
                   Book airport transfer{" "}
                   <ArrowRight size={16} strokeWidth={1.8} />
                 </a>
@@ -736,7 +761,11 @@ export default function Page() {
                   </p>
                 </div>
 
-                <a href="#booking" className="use-link-qarryon use-link-tight">
+                <a
+                  href="#booking"
+                  className="use-link-qarryon use-link-tight"
+                  onClick={() => trackEstimateStarted("use_case_airbnb_hotels")}
+                >
                   Book delivery <ArrowRight size={16} strokeWidth={1.8} />
                 </a>
               </div>
@@ -776,7 +805,11 @@ export default function Page() {
                   </p>
                 </div>
 
-                <a href="#booking" className="use-link-qarryon use-link-tight">
+                <a
+                  href="#booking"
+                  className="use-link-qarryon use-link-tight"
+                  onClick={() => trackEstimateStarted("use_case_events")}
+                >
                   Book for your event{" "}
                   <ArrowRight size={16} strokeWidth={1.8} />
                 </a>
@@ -815,7 +848,11 @@ export default function Page() {
                   </p>
                 </div>
 
-                <a href="#booking" className="use-link-qarryon use-link-tight">
+                <a
+                  href="#booking"
+                  className="use-link-qarryon use-link-tight"
+                  onClick={() => trackEstimateStarted("use_case_departures")}
+                >
                   Book return service{" "}
                   <ArrowRight size={16} strokeWidth={1.8} />
                 </a>
@@ -915,7 +952,11 @@ export default function Page() {
               Travel without the weight. Book your first QarryOn delivery and
               make your next Atlanta arrival feel easier from the start.
             </p>
-            <a className="btn btn-dark" href="#booking">
+            <a
+              className="btn btn-dark"
+              href="#booking"
+              onClick={() => trackEstimateStarted("bottom_book_with_qarryon")}
+            >
               Book with QarryOn
             </a>
           </div>

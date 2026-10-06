@@ -1005,16 +1005,16 @@ export default function Page() {
     Airport Arrivals
   </a>
 
-  <a href="#use-cases">
+  <a href="/atlanta-luggage-storage">
+    Atlanta Luggage Storage
+  </a>
+
+  <a href="/hotel-airbnb-luggage-delivery">
     Hotel & Airbnb Delivery
   </a>
 
-  <a href="/atlanta-airport-luggage-service#travel-gap">
-    Departure Support
-  </a>
-
-  <a href="#use-cases">
-    Events & Group Travel
+  <a href="/events-conferences">
+    Events & Conferences
   </a>
 </div>
 </div>

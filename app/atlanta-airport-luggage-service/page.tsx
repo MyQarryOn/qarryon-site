@@ -4,6 +4,7 @@ import {
   Building2,
   CarFront,
   MapPin,
+  Check,
 } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -220,7 +221,9 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
 
                 <div className="airport-route">
                   <div className="airport-route-item">
-                    <div className="airport-route-marker">ATL</div>
+                    <div className="airport-route-marker">
+                      <Plane size={16} strokeWidth={2} />
+                    </div>
                     <div>
                       <strong>11:05 AM · Arrived</strong>
                       <span>Hartsfield-Jackson</span>
@@ -231,7 +234,7 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
 
                   <div className="airport-route-item">
                     <div className="airport-route-marker airport-route-active">
-                      Q
+                      <Luggage size={16} strokeWidth={2} />
                     </div>
                     <div>
                       <strong>11:40 AM · Bags secured</strong>
@@ -242,17 +245,21 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
                   <div className="airport-route-line" />
 
                   <div className="airport-route-item">
-                    <div className="airport-route-marker">ATL</div>
+                    <div className="airport-route-marker">
+                      <Building2 size={16} strokeWidth={2} />
+                    </div>
                     <div>
                       <strong>12:00 PM · Your time starts</strong>
-<span>Lunch. Meetings. Exploring. Whatever Atlanta has next.</span>
+                      <span>Lunch. Meetings. Exploring. Whatever Atlanta has next.</span>
                     </div>
                   </div>
 
                   <div className="airport-route-line" />
 
                   <div className="airport-route-item">
-                    <div className="airport-route-marker">✓</div>
+                    <div className="airport-route-marker">
+                      <Check size={16} strokeWidth={2.5} />
+                    </div>
                     <div>
                       <strong>4:30 PM · Delivered</strong>
                       <span>Your hotel · Midtown Atlanta</span>
@@ -326,7 +333,9 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
             <div className="airport-steps">
               <article className="airport-step airport-step-one">
                 <span className="airport-step-num">01</span>
-                <div className="airport-step-icon">ATL</div>
+                <div className="airport-step-icon">
+                  <MapPin size={24} strokeWidth={1.8} />
+                </div>
                 <h3>We pick up.</h3>
                 <p>
                   Meet QarryOn at your coordinated airport curbside handoff,
@@ -336,7 +345,9 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
 
               <article className="airport-step airport-step-two">
                 <span className="airport-step-num">02</span>
-                <div className="airport-step-icon">Q</div>
+                <div className="airport-step-icon">
+                  <Luggage size={24} strokeWidth={1.8} />
+                </div>
                 <h3>We hold.</h3>
                 <p>
                   Your luggage stays securely in our care while you explore,
@@ -346,7 +357,9 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
 
               <article className="airport-step airport-step-three">
                 <span className="airport-step-num">03</span>
-                <div className="airport-step-icon">✓</div>
+                <div className="airport-step-icon">
+                  <Check size={24} strokeWidth={1.8} />
+                </div>
                 <h3>We deliver.</h3>
                 <p>
                   Your bags meet you at your hotel, Airbnb, airport departure
@@ -753,16 +766,16 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
     Airport Arrivals
   </Link>
 
-  <Link href="/#use-cases">
+  <Link href="/atlanta-luggage-storage">
+    Atlanta Luggage Storage
+  </Link>
+
+  <Link href="/hotel-airbnb-luggage-delivery">
     Hotel & Airbnb Delivery
   </Link>
 
-  <a href="#travel-gap">
-    Departure Support
-  </a>
-
-  <Link href="/#use-cases">
-    Events & Group Travel
+  <Link href="/events-conferences">
+    Events & Conferences
   </Link>
 </div>
             </div>

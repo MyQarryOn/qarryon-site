@@ -28,7 +28,7 @@ export default function Page() {
       label: "Qarry Lite",
       handling: "Secure handling",
       service: "Simple & Scheduled",
-      courier: "Courier assigned",
+      courier: "Concierge assigned",
       status: "Picked up at 1:42 PM",
       routeTo: "Buckhead",
       progress: "52% complete",
@@ -39,7 +39,7 @@ export default function Page() {
       label: "Qarry Plus",
       handling: "Verified handling",
       service: "Flexible Coordination",
-      courier: "Courier assigned",
+      courier: "Concierge assigned",
       status: "Picked up at 2:14 PM",
       routeTo: "Midtown",
       progress: "68% complete",
@@ -50,7 +50,7 @@ export default function Page() {
       label: "Qarry Elite",
       handling: "Priority handling",
       service: "Priority Concierge",
-      courier: "Courier assigned",
+      courier: "Concierge assigned",
       status: "Picked up at 2:14 PM",
       routeTo: "Buckhead",
       progress: "82% complete",
@@ -65,10 +65,29 @@ export default function Page() {
     const extraBags = Math.max(0, bags - included) * 8;
     return base + extraBags;
   }, [bags, tier]);
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
 
   return (
-    <>
-      <main>
+  <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(faqSchema),
+      }}
+    />
+
+    <main>
         <nav className="nav">
           <div className="container nav-inner">
             <a className="brand" href="#hero" aria-label="QarryOn home">
@@ -213,7 +232,7 @@ export default function Page() {
                   </div>
 
                   <div className="card-detail-row">
-                    <span className="card-detail-label">Courier</span>
+                    <span className="card-detail-label">Concierge</span>
                     <span className="card-detail-value">
                       {tierMeta[tier].courier}
                     </span>
@@ -508,7 +527,7 @@ export default function Page() {
                 <div className="step-icon">02</div>
                 <h3>We handle your bags</h3>
                 <p>
-                  A vetted, rated courier collects your luggage and keeps you updated from pickup through secure hold, transit, and delivery.
+                QarryOn coordinates your luggage pickup and keeps you updated through secure hold, transit, and final delivery.
                 </p>
               </div>
 
@@ -921,31 +940,43 @@ export default function Page() {
             </div>
 
             <div className="footer-links-grid">
-              <div className="footer-col">
-                <h4>Company</h4>
-                <a href="#hero">Home</a>
-                <a href="#how">How it Works</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#use-cases">Use Cases</a>
-              </div>
+  <div className="footer-col">
+    <h4>Company</h4>
+    <a href="/#hero">Home</a>
+    <a href="#how">How it Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#use-cases">Use Cases</a>
+  </div>
 
-              <div className="footer-col">
-                <h4>Support</h4>
-                <a href="#booking">Schedule Pickup</a>
-                <a href="#faq">FAQs</a>
-                <a href="/terms">Terms & Conditions</a>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="mailto:connect@myqarryon.com">Email Us</a>
-              </div>
+  <div className="footer-col">
+    <h4>Support</h4>
+    <a href="/#booking">Schedule Pickup</a>
+    <a href="#faq">FAQs</a>
+    <a href="/terms">Terms & Conditions</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="mailto:connect@myqarryon.com">Email Us</a>
+  </div>
 
-              <div className="footer-col">
-                <h4>Service</h4>
-                <span>Airport arrivals</span>
-                <span>Hotel & Airbnb delivery</span>
-                <span>Departure support</span>
-                <span>Events & group travel</span>
-              </div>
-            </div>
+  <div className="footer-col">
+  <h4>Service</h4>
+
+  <a href="/atlanta-airport-luggage-service">
+    Airport Arrivals
+  </a>
+
+  <a href="#use-cases">
+    Hotel & Airbnb Delivery
+  </a>
+
+  <a href="/atlanta-airport-luggage-service#travel-gap">
+    Departure Support
+  </a>
+
+  <a href="#use-cases">
+    Events & Group Travel
+  </a>
+</div>
+</div>
           </div>
 
           <div className="container footer-bottom">

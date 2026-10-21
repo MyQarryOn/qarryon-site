@@ -1047,6 +1047,7 @@ export default function TermsPage() {
               <a href="mailto:connect@myqarryon.com">
                 connect@myqarryon.com
               </a>
+              <a href="tel:+16783799805">(678) 379-9805</a>
             </div>
           </div>
         </footer>

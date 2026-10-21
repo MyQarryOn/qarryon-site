@@ -5,6 +5,7 @@ export default function StructuredData() {
     "@id": "https://www.myqarryon.com/#organization",
     name: "QarryOn",
     legalName: "QarryOn LLC",
+    telephone: "+16783799805",
     url: "https://www.myqarryon.com",
     description:
       "QarryOn is an Atlanta luggage concierge providing luggage pickup, secure hold, and delivery for travelers.",

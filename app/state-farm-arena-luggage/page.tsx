@@ -3,7 +3,7 @@ import { LandingPageTemplate, type LandingPageConfig } from "../landing-page-tem
 
 const config: LandingPageConfig = {
   slug: "state-farm-arena-luggage",
-  title: "State Farm Arena Luggage Storage | QarryOn",
+  title: "State Farm Arena Luggage Storage",
   description:
     "Need luggage storage near State Farm Arena? QarryOn keeps your bags secure while you enjoy events, meetings, and onward travel through Atlanta.",
   label: "State Farm Arena luggage storage",

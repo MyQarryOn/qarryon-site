@@ -19,7 +19,7 @@ const config: LandingPageConfig = {
   intro:
     "Whether you are in Atlanta for a game, concert, or event day, you do not need your luggage to be part of the experience. QarryOn handles the bag logistics for you.",
   detail:
-    "This is a convenient option for arrivals, departures, and intermediates between stadium visits, neighborhood plans, or hotel arrangements.",
+    "This is a convenient option for arrivals, departures, and the movement between stadium visits, neighborhood plans, or hotel arrangements.",
   audience:
     "Fans, concert-goers, and event travelers moving through Atlanta.",
   serviceName: "Mercedes-Benz Stadium Luggage Storage",

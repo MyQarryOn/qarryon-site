@@ -204,7 +204,7 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
               <div className="airport-journey-card">
                 <div className="airport-live-badge">
                   <span className="airport-live-dot" />
-                  Your QarryOn Journey
+                  Illustrative journey
                 </div>
 
                 <div className="airport-journey-header">
@@ -215,9 +215,13 @@ url: "https://www.myqarryon.com/atlanta-airport-luggage-service",
 
   <div className="airport-journey-status">
     <span className="airport-live-dot" />
-    QarryOn in progress
+    Example itinerary
   </div>
 </div>
+
+                <p className="airport-journey-note">
+                  This visual shows a sample bag flow and is not live tracking or real-time status data.
+                </p>
 
                 <div className="airport-route">
                   <div className="airport-route-item">

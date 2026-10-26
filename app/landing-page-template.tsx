@@ -14,6 +14,16 @@ export type LandingPageFaq = {
   answer: string;
 };
 
+export type LandingPageScenario = {
+  title: string;
+  body: string;
+};
+
+export type LandingPageLink = {
+  href: string;
+  label: string;
+};
+
 export type LandingPageConfig = {
   slug: string;
   title: string;
@@ -29,9 +39,245 @@ export type LandingPageConfig = {
   serviceName: string;
   sourceBase: string;
   faqs: LandingPageFaq[];
+  localScenarios?: LandingPageScenario[];
+  audienceBenefits?: string[];
+  serviceNotes?: string[];
+  relatedPages?: LandingPageLink[];
 };
 
+function getDefaultLocalScenarios(config: LandingPageConfig): LandingPageScenario[] {
+  const slug = config.slug;
+
+  if (slug.includes("hospital")) {
+    return [
+      {
+        title: "Arrive and go directly to the hospital",
+        body: "Landing at ATL and heading straight to a care visit does not need to include a luggage detour.",
+      },
+      {
+        title: "Stay close to family",
+        body: "Keep your bags coordinated while you focus on visiting and supporting a loved one.",
+      },
+      {
+        title: "Move to a hotel or family home later",
+        body: "We can hold your luggage and deliver it when your visit schedule changes or you are ready for the next stop.",
+      },
+    ];
+  }
+
+  if (slug.includes("airbnb")) {
+    return [
+      {
+        title: "Before check-in",
+        body: "Drop your bags with QarryOn while you settle into the day before your rental is ready.",
+      },
+      {
+        title: "After checkout",
+        body: "Hold the luggage while you travel onward without carrying bags to the airport or another stop.",
+      },
+      {
+        title: "Move between neighborhoods",
+        body: "Travel light between accommodations or between Atlanta neighborhoods without a second trip for your bags.",
+      },
+    ];
+  }
+
+  if (slug.includes("hotel")) {
+    return [
+      {
+        title: "Check out without the extra burden",
+        body: "Keep your plans moving after checkout without dragging luggage through the last part of the day.",
+      },
+      {
+        title: "Late flights and early departures",
+        body: "Move bags on your timeline instead of arranging a separate stop at the wrong moment.",
+      },
+      {
+        title: "Hotel to airport or next stay",
+        body: "Keep luggage scheduled around your route instead of carrying it between stops.",
+      },
+    ];
+  }
+
+  if (slug.includes("stadium") || slug.includes("arena") || slug.includes("congress") || slug.includes("conference")) {
+    return [
+      {
+        title: "Event-day simplicity",
+        body: "Keep your day focused on the game, meeting, or venue schedule instead of bag logistics.",
+      },
+      {
+        title: "From hotel to venue",
+        body: "Move luggage between locations without stopping back at your room or carrying a bag through the venue.",
+      },
+      {
+        title: "After the event",
+        body: "Coordinate delivery when your next stop is ready instead of leaving luggage in the wrong place.",
+      },
+    ];
+  }
+
+  if (slug.includes("business")) {
+    return [
+      {
+        title: "Tight travel schedules",
+        body: "Keep a clean path from ATL to hotel, office, and meeting cadence without extra bag handling time.",
+      },
+      {
+        title: "Multi-stop itineraries",
+        body: "Move luggage between the airport, lodging, and meeting locations without repacking or retracing steps.",
+      },
+      {
+        title: "Same-day flexibility",
+        body: "Stay on schedule when travel plans shift between early flights, late meetings, and evening plans.",
+      },
+    ];
+  }
+
+  return [
+    {
+      title: "Pickup when it fits your plans",
+      body: "Choose a handoff point that matches your arrival, destination, or hotel schedule.",
+    },
+    {
+      title: "Secure hold while you move",
+      body: "Keep your luggage protected while you work, explore, or transition between destinations.",
+    },
+    {
+      title: "Delivery when the next stop is ready",
+      body: "Have your bags arrive around your next Atlanta move instead of waiting on the wrong location.",
+    },
+  ];
+}
+
+function getDefaultAudienceBenefits(config: LandingPageConfig): string[] {
+  if (config.slug.includes("hospital")) {
+    return [
+      "Visit patients without carrying luggage from arrival to the next stop",
+      "Use a calm, simple logistics step during a stressful travel day",
+      "Coordinate bag delivery around hotel, family-home, or airport timing",
+    ];
+  }
+
+  if (config.slug.includes("airbnb")) {
+    return [
+      "Arrive before check-in without dragging bags around the city",
+      "Leave after checkout without a midday luggage bottleneck",
+      "Move easily between rental homes, hotels, and airport routes",
+    ];
+  }
+
+  if (config.slug.includes("business")) {
+    return [
+      "Keep meetings and travel timing on track",
+      "Move between ATL, hotel, and downtown routes without extra friction",
+      "Reduce bag stress during short, high-pace Atlanta trips",
+    ];
+  }
+
+  return [
+    "Travel from ATL to your next stop without dragging bags through the city",
+    "Keep your luggage coordinated around hotel, venue, and airport timing",
+    "Move through Atlanta more freely without solving bag logistics at every stop",
+  ];
+}
+
+function getDefaultServiceNotes(config: LandingPageConfig): string[] {
+  const base = [
+    "Standard service hours are 8:00 AM–10:00 PM.",
+    "Airport handoffs are curbside only; there is no inside-terminal pickup.",
+    "Core service is generally within the Atlanta I-285 area and may require approval outside the standard service corridor.",
+    "Venue-adjacent handoffs depend on access permissions and operational feasibility.",
+    "QarryOn does not transport passengers and does not provide medical or hospital access services.",
+  ];
+
+  if (config.slug.includes("hospital")) {
+    return [
+      "This page is for luggage coordination only and does not imply hospital affiliation or access permissions.",
+      "Airport handoffs are curbside only, with approved pickup and delivery timing based on your itinerary.",
+      "Standard service hours are 8:00 AM–10:00 PM, and outside-area requests may require approval.",
+      "Authorized recipient details, handoff instructions, and delivery verification are required for some third-party drop-offs.",
+    ];
+  }
+
+  return base;
+}
+
+function getDefaultRelatedPages(config: LandingPageConfig): LandingPageLink[] {
+  const map: Record<string, LandingPageLink[]> = {
+    "atlanta-luggage-pickup-delivery": [
+      { href: "/atlanta-airport-luggage-service", label: "ATL Airport luggage service" },
+      { href: "/hotel-airbnb-luggage-delivery", label: "Hotel & Airbnb luggage storage" },
+      { href: "/events-conferences", label: "Event & conference luggage support" },
+    ],
+    "downtown-atlanta-luggage-storage": [
+      { href: "/atlanta-airport-luggage-service", label: "ATL Airport luggage service" },
+      { href: "/events-conferences", label: "Event luggage storage" },
+      { href: "/atlanta-business-travel-luggage", label: "Business travel luggage support" },
+    ],
+    "midtown-atlanta-luggage-storage": [
+      { href: "/atlanta-business-travel-luggage", label: "Atlanta business travel luggage" },
+      { href: "/hotel-airbnb-luggage-delivery", label: "Hotel & Airbnb luggage support" },
+      { href: "/atlanta-luggage-storage", label: "Atlanta luggage storage" },
+    ],
+    "buckhead-luggage-storage": [
+      { href: "/atlanta-airbnb-luggage-storage", label: "Atlanta Airbnb luggage storage" },
+      { href: "/atlanta-hotel-checkout-luggage-delivery", label: "Hotel checkout luggage delivery" },
+      { href: "/atlanta-luggage-pickup-delivery", label: "Atlanta luggage pickup & delivery" },
+    ],
+    "georgia-world-congress-center-luggage": [
+      { href: "/events-conferences", label: "Conference luggage support" },
+      { href: "/atlanta-business-travel-luggage", label: "Business travel luggage" },
+      { href: "/atlanta-group-luggage-delivery", label: "Group luggage delivery" },
+    ],
+    "mercedes-benz-stadium-luggage": [
+      { href: "/state-farm-arena-luggage", label: "State Farm Arena luggage support" },
+      { href: "/events-conferences", label: "Event luggage storage" },
+      { href: "/atlanta-group-luggage-delivery", label: "Group luggage delivery" },
+    ],
+    "state-farm-arena-luggage": [
+      { href: "/mercedes-benz-stadium-luggage", label: "Mercedes-Benz Stadium luggage" },
+      { href: "/events-conferences", label: "Event luggage support" },
+      { href: "/atlanta-group-luggage-delivery", label: "Group luggage delivery" },
+    ],
+    "atlanta-airbnb-luggage-storage": [
+      { href: "/hotel-airbnb-luggage-delivery", label: "Hotel & Airbnb luggage support" },
+      { href: "/atlanta-hotel-checkout-luggage-delivery", label: "Hotel checkout luggage delivery" },
+      { href: "/atlanta-luggage-storage", label: "Atlanta luggage storage" },
+    ],
+    "atlanta-hospital-visitor-luggage-delivery": [
+      { href: "/atlanta-luggage-pickup-delivery", label: "Atlanta luggage pickup & delivery" },
+      { href: "/atlanta-airbnb-luggage-storage", label: "Atlanta Airbnb luggage storage" },
+      { href: "/atlanta-airport-luggage-service", label: "ATL Airport luggage service" },
+    ],
+    "atlanta-hotel-checkout-luggage-delivery": [
+      { href: "/hotel-airbnb-luggage-delivery", label: "Hotel & Airbnb luggage support" },
+      { href: "/atlanta-airport-luggage-service", label: "ATL Airport luggage service" },
+      { href: "/atlanta-luggage-pickup-delivery", label: "Atlanta luggage pickup & delivery" },
+    ],
+    "atlanta-business-travel-luggage": [
+      { href: "/midtown-atlanta-luggage-storage", label: "Midtown Atlanta luggage storage" },
+      { href: "/atlanta-airport-luggage-service", label: "ATL airport luggage pickup" },
+      { href: "/events-conferences", label: "Event luggage support" },
+    ],
+    "atlanta-group-luggage-delivery": [
+      { href: "/events-conferences", label: "Conference luggage support" },
+      { href: "/atlanta-business-travel-luggage", label: "Business travel luggage" },
+      { href: "/atlanta-luggage-pickup-delivery", label: "Atlanta luggage pickup & delivery" },
+    ],
+  };
+
+  return map[config.slug] ?? [
+    { href: "/atlanta-luggage-pickup-delivery", label: "Atlanta luggage pickup & delivery" },
+    { href: "/atlanta-airport-luggage-service", label: "ATL Airport luggage service" },
+    { href: "/hotel-airbnb-luggage-delivery", label: "Hotel & Airbnb luggage support" },
+  ];
+}
+
 export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
+  const localScenarios = config.localScenarios ?? getDefaultLocalScenarios(config);
+  const audienceBenefits = config.audienceBenefits ?? getDefaultAudienceBenefits(config);
+  const serviceNotes = config.serviceNotes ?? getDefaultServiceNotes(config);
+  const relatedPages = config.relatedPages ?? getDefaultRelatedPages(config);
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -162,20 +408,24 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
               <div className="airport-journey-card">
                 <div className="airport-live-badge">
                   <span className="airport-live-dot" />
-                  Your QarryOn journey
+                  Illustrative journey
                 </div>
 
                 <div className="airport-journey-header">
                   <div>
-                    <span className="airport-journey-kicker">Atlanta route</span>
+                    <span className="airport-journey-kicker">Illustrative route</span>
                     <strong>{config.eyebrow}</strong>
                   </div>
 
                   <div className="airport-journey-status">
                     <span className="airport-live-dot" />
-                    QarryOn in progress
+                    Example itinerary
                   </div>
                 </div>
+
+                <p className="airport-journey-note">
+                  This visual shows a sample bag flow and is not live tracking or real-time status data.
+                </p>
 
                 <div className="airport-route">
                   <div className="airport-route-item">
@@ -214,7 +464,7 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
                 </div>
 
                 <div className="airport-journey-footer">
-                  <span>Journey status</span>
+                  <span>Illustrative route</span>
                   <strong>Ready when you are</strong>
                 </div>
               </div>
@@ -310,26 +560,33 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
             </div>
 
             <div className="airport-use-grid">
-              <article>
-                <span>01 / TRAVELER</span>
-                <h3>Airport-to-city movement</h3>
-                <p>Get from ATL to your next stop without stressing over a suitcase while your day begins.</p>
-              </article>
-              <article>
-                <span>02 / TIMING</span>
-                <h3>Early arrivals and late departures</h3>
-                <p>Keep your schedule smooth with luggage support during the awkward in-between hours.</p>
-              </article>
-              <article>
-                <span>03 / EVENT</span>
-                <h3>Conference, game, or venue day</h3>
-                <p>Enjoy the experience without taking your luggage to every stop or venue in between.</p>
-              </article>
-              <article>
-                <span>04 / FLEXIBILITY</span>
-                <h3>Multi-stop Atlanta plans</h3>
-                <p>Move your bags between neighborhoods, hotels, homes, and airport routes with one clear service flow.</p>
-              </article>
+              {audienceBenefits.map((benefit, index) => (
+                <article key={benefit}>
+                  <span>{String(index + 1).padStart(2, "0")} / BENEFIT</span>
+                  <h3>
+                    {index === 0 && "Arrival-ready travel"}
+                    {index === 1 && "Flexible timing"}
+                    {index === 2 && "Simpler transitions"}
+                  </h3>
+                  <p>{benefit}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="airport-gap-scenarios" style={{ marginTop: "2rem" }}>
+              {localScenarios.map((scenario, index) => (
+                <div className="airport-gap-scenario" key={scenario.title}>
+                  <div className="airport-gap-label">SCENARIO {index + 1}</div>
+                  <strong>{scenario.title}</strong>
+                  <p>{scenario.body}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="airport-service-notes" style={{ marginTop: "2rem" }}>
+              {serviceNotes.map((note) => (
+                <div key={note} className="airport-service-note">{note}</div>
+              ))}
             </div>
           </div>
         </section>
@@ -394,7 +651,7 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
             <div>
               <div className="airport-eyebrow">FAQs</div>
               <h2>Everything travelers ask before they book.</h2>
-              <p>{config.serviceName} is shaped for busy Atlanta routines, alias timing gaps, and travelers who want their luggage handled without extra detours.</p>
+              <p>{config.serviceName} is shaped for busy Atlanta routines, schedule changes, and travelers who want their luggage handled without extra detours.</p>
             </div>
 
             <div className="airport-faq-list">
@@ -403,6 +660,23 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
                   <h3>{faq.question}</h3>
                   <p>{faq.answer}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="airport-section airport-section-light">
+          <div className="airport-container">
+            <div className="airport-section-head">
+              <div className="airport-eyebrow">Related Atlanta routes</div>
+              <h2>Explore nearby luggage support options.</h2>
+            </div>
+
+            <div className="airport-related-links" style={{ display: "grid", gap: "0.75rem", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+              {relatedPages.map((page) => (
+                <Link key={page.href} href={page.href} className="airport-btn airport-btn-glass" style={{ justifyContent: "center", textAlign: "center" }}>
+                  {page.label}
+                </Link>
               ))}
             </div>
           </div>

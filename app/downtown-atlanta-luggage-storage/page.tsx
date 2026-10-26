@@ -3,7 +3,7 @@ import { LandingPageTemplate, type LandingPageConfig } from "../landing-page-tem
 
 const config: LandingPageConfig = {
   slug: "downtown-atlanta-luggage-storage",
-  title: "Downtown Atlanta Luggage Storage | QarryOn",
+  title: "Downtown Atlanta Luggage Storage",
   description:
     "Need luggage storage in Downtown Atlanta without the storage detour? QarryOn picks up, securely holds, and delivers your bags when you are ready.",
   label: "Downtown Atlanta luggage storage",

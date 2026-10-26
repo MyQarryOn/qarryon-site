@@ -3,7 +3,7 @@ import { LandingPageTemplate, type LandingPageConfig } from "../landing-page-tem
 
 const config: LandingPageConfig = {
   slug: "atlanta-airbnb-luggage-storage",
-  title: "Atlanta Airbnb Luggage Storage | QarryOn",
+  title: "Atlanta Airbnb Luggage Storage",
   description:
     "Need Atlanta Airbnb luggage storage before check-in or after checkout? QarryOn picks up, stores, and delivers your luggage so your stay stays easy.",
   label: "Atlanta Airbnb luggage storage",

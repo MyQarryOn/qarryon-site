@@ -3,7 +3,7 @@ import { LandingPageTemplate, type LandingPageConfig } from "../landing-page-tem
 
 const config: LandingPageConfig = {
   slug: "buckhead-luggage-storage",
-  title: "Buckhead Luggage Storage | QarryOn",
+  title: "Buckhead Luggage Storage",
   description:
     "Need Buckhead luggage storage without an extra stop? QarryOn picks up, securely holds, and delivers your bags around Atlanta when you are ready.",
   label: "Buckhead luggage storage",

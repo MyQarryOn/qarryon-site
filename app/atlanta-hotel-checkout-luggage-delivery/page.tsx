@@ -3,7 +3,7 @@ import { LandingPageTemplate, type LandingPageConfig } from "../landing-page-tem
 
 const config: LandingPageConfig = {
   slug: "atlanta-hotel-checkout-luggage-delivery",
-  title: "Atlanta Hotel Checkout Luggage Delivery | QarryOn",
+  title: "Atlanta Hotel Checkout Luggage Delivery",
   description:
     "Need luggage delivery after hotel checkout in Atlanta? QarryOn picks up your bags, stores them securely, and delivers them when your next plan is ready.",
   label: "Hotel checkout luggage service",

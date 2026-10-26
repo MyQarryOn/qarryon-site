@@ -3,7 +3,7 @@ import { LandingPageTemplate, type LandingPageConfig } from "../landing-page-tem
 
 const config: LandingPageConfig = {
   slug: "atlanta-group-luggage-delivery",
-  title: "Atlanta Group Luggage Delivery | QarryOn",
+  title: "Atlanta Group Luggage Delivery",
   description:
     "Need group luggage delivery in Atlanta? QarryOn handles multiple bags for families, teams, and event travel so everyone keeps moving without the burden.",
   label: "Group luggage delivery",

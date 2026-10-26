@@ -3,7 +3,7 @@ import { LandingPageTemplate, type LandingPageConfig } from "../landing-page-tem
 
 const config: LandingPageConfig = {
   slug: "atlanta-hospital-visitor-luggage-delivery",
-  title: "Atlanta Hospital Visitor Luggage Delivery | QarryOn",
+  title: "Atlanta Hospital Visitor Luggage Delivery",
   description:
     "Traveling to Atlanta to visit a hospital patient? QarryOn helps hospital visitors move bags securely between the airport, hotel, and hospital area.",
   label: "Hospital visitor luggage support",

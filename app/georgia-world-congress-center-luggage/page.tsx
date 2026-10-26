@@ -3,7 +3,7 @@ import { LandingPageTemplate, type LandingPageConfig } from "../landing-page-tem
 
 const config: LandingPageConfig = {
   slug: "georgia-world-congress-center-luggage",
-  title: "Georgia World Congress Center Luggage Storage | QarryOn",
+  title: "Georgia World Congress Center Luggage Storage",
   description:
     "Need luggage storage near the Georgia World Congress Center? QarryOn picks up, holds, and delivers your bags so you can enjoy Atlanta events without carrying luggage.",
   label: "GWCC luggage storage",

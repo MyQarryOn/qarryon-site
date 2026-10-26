@@ -7,7 +7,6 @@ import {
   CalendarDays,
   Users,
   Car,
-  Building,
   CheckCircle2,
   Presentation,
   Check,

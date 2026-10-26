@@ -7,7 +7,6 @@ import {
   CalendarDays,
   Users,
   Car,
-  Building,
   CheckCircle2,
   Presentation,
   Check,
@@ -22,7 +21,7 @@ const eventsFaqs = [
   {
     question: "Can QarryOn help with conference or event luggage?",
     answer:
-      "Yes. QarryOn is designed for travelers moving between airport arrivals, hotels, event venues, and next destinations. We can handle the timing gaps where luggage would otherwise slow down the day.",
+      "Yes. QarryOn is designed for travelers moving between airport arrivals, hotels, event venues, and next destinations. We can handle schedule changes where luggage would otherwise slow down the day.",
   },
   {
     question: "Is this useful for speakers, exhibitors, and groups?",
@@ -203,7 +202,7 @@ export default function EventsConferencesPage() {
               <div className="airport-journey-card">
                 <div className="airport-live-badge">
                   <span className="airport-live-dot" />
-                  Your event-day flow
+                  Illustrative journey
                 </div>
 
                 <div className="airport-journey-header">
@@ -214,9 +213,13 @@ export default function EventsConferencesPage() {
 
                   <div className="airport-journey-status">
                     <span className="airport-live-dot" />
-                    QarryOn in progress
+                    Example itinerary
                   </div>
                 </div>
+
+                <p className="airport-journey-note">
+                  This visual shows a sample bag flow and is not live tracking or real-time status data.
+                </p>
 
                 <div className="airport-route">
                   <div className="airport-route-item">

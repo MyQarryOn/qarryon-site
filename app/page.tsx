@@ -4,6 +4,7 @@ import {
   trackEstimateStarted,
   trackBookingStarted,
 } from "./analytics";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import {
@@ -21,11 +22,14 @@ export default function Page() {
   const [tier, setTier] = useState<"basic" | "premium" | "vip">("premium");
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
 
-  const pricing = {
-    basic: 54,
-    premium: 74,
-    vip: 110,
-  };
+  const pricing = useMemo(
+    () => ({
+      basic: 54,
+      premium: 74,
+      vip: 110,
+    }),
+    []
+  );
 
   const tierMeta = {
     basic: {
@@ -68,7 +72,7 @@ export default function Page() {
     const included = tier === "basic" ? 2 : tier === "premium" ? 5 : 8;
     const extraBags = Math.max(0, bags - included) * 8;
     return base + extraBags;
-  }, [bags, tier]);
+  }, [bags, pricing, tier]);
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -983,7 +987,7 @@ export default function Page() {
             <div className="footer-links-grid">
   <div className="footer-col">
     <h4>Company</h4>
-    <a href="/#hero">Home</a>
+    <Link href="/#hero">Home</Link>
     <a href="#how">How it Works</a>
     <a href="#pricing">Pricing</a>
     <a href="#use-cases">Use Cases</a>
@@ -991,7 +995,7 @@ export default function Page() {
 
   <div className="footer-col">
     <h4>Support</h4>
-    <a href="/#booking">Schedule Pickup</a>
+    <Link href="/#booking">Schedule Pickup</Link>
     <a href="#faq">FAQs</a>
     <a href="/terms">Terms & Conditions</a>
     <a href="/privacy">Privacy Policy</a>

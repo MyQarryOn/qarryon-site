@@ -19,12 +19,12 @@ const hotelFaqs = [
   {
     question: "Can QarryOn help before hotel check-in or after checkout?",
     answer:
-      "Yes. If you arrive before your room is ready or you check out before the rest of your day is over, QarryOn can coordinate luggage pickup and delivery around that timing gap so your Atlanta plans stay flexible.",
+      "Yes. If you arrive before your room is ready or you check out before the rest of your day is over, QarryOn can coordinate luggage pickup and delivery around those schedule changes so your Atlanta plans stay flexible.",
   },
   {
-    question: "What about Airbnb and vacation-rental timing gaps?",
+    question: "What about Airbnb and vacation-rental schedule changes?",
     answer:
-      "QarryOn works well for Airbnb and vacation-rental timing gaps too. If your check-in or check-out schedule does not line up with your travel plans, we can coordinate pickup and delivery around the day.",
+      "QarryOn works well for Airbnb and vacation-rental schedule changes too. If your check-in or check-out timing does not line up with your travel plans, we can coordinate pickup and delivery around the day.",
   },
   {
     question: "Where can my luggage be delivered after checkout?",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Hotel & Airbnb Luggage Storage in Atlanta | QarryOn",
     description:
-      "Check-in can wait. Your Atlanta day does not have to. QarryOn handles hotel and Airbnb luggage timing gaps with pickup, secure hold, and delivery.",
+      "Check-in can wait. Your Atlanta day does not have to. QarryOn handles hotel and Airbnb luggage schedule changes with pickup, secure hold, and delivery.",
     url: "/hotel-airbnb-luggage-delivery",
   },
 };
@@ -87,7 +87,7 @@ export default function HotelAirbnbLuggageDeliveryPage() {
       name: "Atlanta",
     },
     description:
-      "QarryOn provides luggage pickup, secure hold, and delivery for Atlanta travelers dealing with hotel check-in timing gaps, Airbnb scheduling gaps, checkout timing, and travel-day transitions.",
+      "QarryOn provides luggage pickup, secure hold, and delivery for Atlanta travelers dealing with hotel check-in timing, Airbnb scheduling changes, checkout timing, and travel-day transitions.",
   };
 
   return (
@@ -201,7 +201,7 @@ export default function HotelAirbnbLuggageDeliveryPage() {
               <div className="airport-journey-card">
                 <div className="airport-live-badge">
                   <span className="airport-live-dot" />
-                  Your hotel timing fix
+                  Illustrative journey
                 </div>
 
                 <div className="airport-journey-header">
@@ -212,9 +212,13 @@ export default function HotelAirbnbLuggageDeliveryPage() {
 
                   <div className="airport-journey-status">
                     <span className="airport-live-dot" />
-                    QarryOn in progress
+                    Example itinerary
                   </div>
                 </div>
+
+                <p className="airport-journey-note">
+                  This visual shows a sample bag flow and is not live tracking or real-time status data.
+                </p>
 
                 <div className="airport-route">
                   <div className="airport-route-item">
@@ -286,10 +290,10 @@ export default function HotelAirbnbLuggageDeliveryPage() {
 
             <div className="airport-story-copy">
               <p className="airport-story-lead">
-                Hotel and Airbnb timing gaps are one of the most frustrating parts of
-                a travel day. You are usually either arriving before your room is ready
-                or checking out before the rest of the trip has caught up. QarryOn
-                removes that friction so your luggage does not control the rhythm of the day.
+                Hotel and Airbnb schedule changes are often the most frustrating part of
+                a travel day. You may be arriving before your room is ready or checking
+                out before the rest of the trip has caught up. QarryOn removes that
+                friction so your luggage does not control the rhythm of the day.
               </p>
 
               <div className="airport-gap-scenarios">

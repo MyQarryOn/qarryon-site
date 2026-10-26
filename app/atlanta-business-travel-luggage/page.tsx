@@ -3,7 +3,7 @@ import { LandingPageTemplate, type LandingPageConfig } from "../landing-page-tem
 
 const config: LandingPageConfig = {
   slug: "atlanta-business-travel-luggage",
-  title: "Atlanta Business Travel Luggage Support | QarryOn",
+  title: "Atlanta Business Travel Luggage Support",
   description:
     "Need luggage support during Atlanta business travel? QarryOn handles airport pickup, hotel transitions, and secure bag delivery for busy work schedules.",
   label: "Atlanta business travel luggage",

@@ -472,7 +472,7 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
           </div>
         </section>
 
-        <section id="how" className="airport-story airport-section-light">
+        <section id="how" className="airport-story">
           <div className="airport-container airport-story-grid">
             <div>
               <div className="airport-eyebrow">How it works</div>

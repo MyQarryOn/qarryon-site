@@ -3,7 +3,7 @@ import { LandingPageTemplate, type LandingPageConfig } from "../landing-page-tem
 
 const config: LandingPageConfig = {
   slug: "mercedes-benz-stadium-luggage",
-  title: "Mercedes-Benz Stadium Luggage Storage | QarryOn",
+  title: "Mercedes-Benz Stadium Luggage Storage",
   description:
     "Need luggage storage near Mercedes-Benz Stadium? QarryOn picks up, secures, and delivers your bags so you can enjoy Atlanta events with total freedom.",
   label: "Mercedes-Benz Stadium luggage storage",

@@ -408,23 +408,20 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
               <div className="airport-journey-card">
                 <div className="airport-live-badge">
                   <span className="airport-live-dot" />
-                  Illustrative journey
+                  Example luggage journey
                 </div>
 
                 <div className="airport-journey-header">
                   <div>
-                    <span className="airport-journey-kicker">Illustrative route</span>
+                    <span className="airport-journey-kicker">Your QarryOn experience</span>
                     <strong>{config.eyebrow}</strong>
                   </div>
 
-                  <div className="airport-journey-status">
-                    <span className="airport-live-dot" />
-                    Example itinerary
-                  </div>
+
                 </div>
 
                 <p className="airport-journey-note">
-                  This visual shows a sample bag flow and is not live tracking or real-time status data.
+                  Sample service flow — not live tracking.
                 </p>
 
                 <div className="airport-route">
@@ -464,7 +461,7 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
                 </div>
 
                 <div className="airport-journey-footer">
-                  <span>Illustrative route</span>
+                  <span>Pickup · Secure hold · Delivery</span>
                   <strong>Ready when you are</strong>
                 </div>
               </div>
@@ -573,17 +570,9 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
               ))}
             </div>
 
-            <div className="airport-gap-scenarios" style={{ marginTop: "2rem" }}>
-              {localScenarios.map((scenario, index) => (
-                <div className="airport-gap-scenario" key={scenario.title}>
-                  <div className="airport-gap-label">SCENARIO {index + 1}</div>
-                  <strong>{scenario.title}</strong>
-                  <p>{scenario.body}</p>
-                </div>
-              ))}
-            </div>
 
-            <div className="airport-service-notes" style={{ marginTop: "2rem" }}>
+
+            <div className="airport-service-notes qarryon-service-notes">
               {serviceNotes.map((note) => (
                 <div key={note} className="airport-service-note">{note}</div>
               ))}
@@ -665,20 +654,19 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
           </div>
         </section>
 
-        <section className="airport-section airport-section-light">
+        <section className="airport-section airport-section-light qarryon-related-section">
           <div className="airport-container">
             <div className="airport-section-head">
-              <div className="airport-eyebrow">Related Atlanta routes</div>
-              <h2>Explore nearby luggage support options.</h2>
+              <div className="airport-eyebrow">Explore QarryOn</div>
+              <h2>More ways to travel light in Atlanta.</h2>
             </div>
-
-            <div className="airport-related-links" style={{ display: "grid", gap: "0.75rem", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+            <nav className="qarryon-related-links" aria-label="Related QarryOn services">
               {relatedPages.map((page) => (
-                <Link key={page.href} href={page.href} className="airport-btn airport-btn-glass" style={{ justifyContent: "center", textAlign: "center" }}>
-                  {page.label}
+                <Link key={page.href} href={page.href} className="qarryon-related-link">
+                  {page.label}<span aria-hidden="true">↗</span>
                 </Link>
               ))}
-            </div>
+            </nav>
           </div>
         </section>
 
@@ -708,7 +696,7 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
               <div className="airport-footer-brand">
                 <Link href="/" aria-label="QarryOn home">
                   <Image
-                    src="/Light Logo Header.png"
+                    src="/Footer-logo-dark2.png"
                     alt="QarryOn"
                     width={240}
                     height={80}

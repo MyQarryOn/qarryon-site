@@ -1387,3 +1387,58 @@ font-size: clamp(2.8rem, 3.8vw, 3.7rem);
     gap: 8px;
   }
 }
+
+/* Shared SEO landing-page polish: scoped to the template's new classes. */
+.qarryon-related-section {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+.qarryon-related-section .airport-section-head {
+  margin-bottom: 28px;
+}
+.qarryon-related-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.qarryon-related-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 72px;
+  padding: 18px 22px;
+  border: 1px solid rgba(13, 27, 42, 0.17);
+  border-radius: 14px;
+  background: #fff;
+  color: #0d1b2a;
+  font-weight: 700;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.qarryon-related-link span {
+  color: #168f87;
+  font-size: 1.25rem;
+}
+.qarryon-related-link:hover,
+.qarryon-related-link:focus-visible {
+  border-color: #168f87;
+  box-shadow: 0 5px 20px rgba(13, 27, 42, 0.09);
+}
+.qarryon-related-link:focus-visible {
+  outline: 3px solid #2ec4b6;
+  outline-offset: 3px;
+}
+.qarryon-service-notes {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.16);
+}
+@media (max-width: 900px) {
+  .qarryon-related-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .qarryon-related-links { grid-template-columns: 1fr; }
+  .qarryon-related-section { padding-top: 58px; padding-bottom: 58px; }
+}

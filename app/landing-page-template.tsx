@@ -14,11 +14,6 @@ export type LandingPageFaq = {
   answer: string;
 };
 
-export type LandingPageScenario = {
-  title: string;
-  body: string;
-};
-
 export type LandingPageLink = {
   href: string;
   label: string;
@@ -39,115 +34,10 @@ export type LandingPageConfig = {
   serviceName: string;
   sourceBase: string;
   faqs: LandingPageFaq[];
-  localScenarios?: LandingPageScenario[];
   audienceBenefits?: string[];
   serviceNotes?: string[];
   relatedPages?: LandingPageLink[];
 };
-
-function getDefaultLocalScenarios(config: LandingPageConfig): LandingPageScenario[] {
-  const slug = config.slug;
-
-  if (slug.includes("hospital")) {
-    return [
-      {
-        title: "Arrive and go directly to the hospital",
-        body: "Landing at ATL and heading straight to a care visit does not need to include a luggage detour.",
-      },
-      {
-        title: "Stay close to family",
-        body: "Keep your bags coordinated while you focus on visiting and supporting a loved one.",
-      },
-      {
-        title: "Move to a hotel or family home later",
-        body: "We can hold your luggage and deliver it when your visit schedule changes or you are ready for the next stop.",
-      },
-    ];
-  }
-
-  if (slug.includes("airbnb")) {
-    return [
-      {
-        title: "Before check-in",
-        body: "Drop your bags with QarryOn while you settle into the day before your rental is ready.",
-      },
-      {
-        title: "After checkout",
-        body: "Hold the luggage while you travel onward without carrying bags to the airport or another stop.",
-      },
-      {
-        title: "Move between neighborhoods",
-        body: "Travel light between accommodations or between Atlanta neighborhoods without a second trip for your bags.",
-      },
-    ];
-  }
-
-  if (slug.includes("hotel")) {
-    return [
-      {
-        title: "Check out without the extra burden",
-        body: "Keep your plans moving after checkout without dragging luggage through the last part of the day.",
-      },
-      {
-        title: "Late flights and early departures",
-        body: "Move bags on your timeline instead of arranging a separate stop at the wrong moment.",
-      },
-      {
-        title: "Hotel to airport or next stay",
-        body: "Keep luggage scheduled around your route instead of carrying it between stops.",
-      },
-    ];
-  }
-
-  if (slug.includes("stadium") || slug.includes("arena") || slug.includes("congress") || slug.includes("conference")) {
-    return [
-      {
-        title: "Event-day simplicity",
-        body: "Keep your day focused on the game, meeting, or venue schedule instead of bag logistics.",
-      },
-      {
-        title: "From hotel to venue",
-        body: "Move luggage between locations without stopping back at your room or carrying a bag through the venue.",
-      },
-      {
-        title: "After the event",
-        body: "Coordinate delivery when your next stop is ready instead of leaving luggage in the wrong place.",
-      },
-    ];
-  }
-
-  if (slug.includes("business")) {
-    return [
-      {
-        title: "Tight travel schedules",
-        body: "Keep a clean path from ATL to hotel, office, and meeting cadence without extra bag handling time.",
-      },
-      {
-        title: "Multi-stop itineraries",
-        body: "Move luggage between the airport, lodging, and meeting locations without repacking or retracing steps.",
-      },
-      {
-        title: "Same-day flexibility",
-        body: "Stay on schedule when travel plans shift between early flights, late meetings, and evening plans.",
-      },
-    ];
-  }
-
-  return [
-    {
-      title: "Pickup when it fits your plans",
-      body: "Choose a handoff point that matches your arrival, destination, or hotel schedule.",
-    },
-    {
-      title: "Secure hold while you move",
-      body: "Keep your luggage protected while you work, explore, or transition between destinations.",
-    },
-    {
-      title: "Delivery when the next stop is ready",
-      body: "Have your bags arrive around your next Atlanta move instead of waiting on the wrong location.",
-    },
-  ];
-}
 
 function getDefaultAudienceBenefits(config: LandingPageConfig): string[] {
   if (config.slug.includes("hospital")) {
@@ -274,7 +164,6 @@ function getDefaultRelatedPages(config: LandingPageConfig): LandingPageLink[] {
 }
 
 export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
-  const localScenarios = config.localScenarios ?? getDefaultLocalScenarios(config);
   const audienceBenefits = config.audienceBenefits ?? getDefaultAudienceBenefits(config);
   const serviceNotes = config.serviceNotes ?? getDefaultServiceNotes(config);
   const relatedPages = config.relatedPages ?? getDefaultRelatedPages(config);
